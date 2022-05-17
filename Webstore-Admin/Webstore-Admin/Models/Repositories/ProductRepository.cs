@@ -22,7 +22,7 @@ namespace Webstore_Admin.Models.Repositories
 
         public async Task<Product> DeleteAsync(int id)
         {
-            var product =await  _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
             if (product != null)
             {
                 _context.Products.Remove(product);

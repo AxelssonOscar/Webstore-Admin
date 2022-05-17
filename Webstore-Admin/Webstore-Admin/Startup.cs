@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webstore_Admin.Data.Contexts;
+using Webstore_Admin.Models.Contracts;
+using Webstore_Admin.Models.Repositories;
 
 namespace Webstore_Admin
 {
@@ -28,6 +30,8 @@ namespace Webstore_Admin
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
