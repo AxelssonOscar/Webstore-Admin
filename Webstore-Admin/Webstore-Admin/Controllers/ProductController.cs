@@ -34,7 +34,16 @@ namespace Webstore_Admin.Controllers
             return View(result);
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _productRepository.DeleteAsync(id);
 
+            if (result == null)
+            {
+                return BadRequest("Ajabaja Titta detta gick inte!!");
+            }
+            return RedirectToAction("Index");
+        }
 
     }
 }
