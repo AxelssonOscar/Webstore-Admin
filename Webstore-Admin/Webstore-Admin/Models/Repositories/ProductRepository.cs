@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Webstore_Admin.Data.Contexts;
 using Webstore_Admin.Models.Contracts;
@@ -46,5 +47,12 @@ namespace Webstore_Admin.Models.Repositories
             }
             return null;
         }
+
+        public async Task<IEnumerable<Product>> GetAllAsync() =>
+            await _context.Products.ToListAsync();
+
+        public async Task<Product> GetSingleAsync(int id) =>
+            await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
+
     }
 }
