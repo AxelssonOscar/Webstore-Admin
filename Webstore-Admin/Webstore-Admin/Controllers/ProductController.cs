@@ -13,9 +13,9 @@ namespace Webstore_Admin.Controllers
             _productRepository = productRepository;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _productRepository.GetAllAsync());
         }
 
         public async Task<IActionResult> Create(Product product)
@@ -27,5 +27,14 @@ namespace Webstore_Admin.Controllers
             }
             return View(product);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var result = await _productRepository.GetSingleAsync(id);
+            return View(result);
+        }
+
+
+
     }
 }

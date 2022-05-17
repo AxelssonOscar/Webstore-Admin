@@ -1,1 +1,47 @@
-﻿<h1>Index :)</h1>
+﻿@model IEnumerable<Product>
+
+<h1>Index :)</h1>
+
+<div>
+
+	<table>
+		<thead>
+			<tr>
+				<th>
+					@Html.DisplayNameFor(x => x.Name)
+				</th>
+				<th>
+					@Html.DisplayNameFor(x => x.Price)
+				</th>
+				<th>
+					@Html.DisplayNameFor(x => x.UnitsInStock)
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (Product product in Model)
+			{
+				<tr>
+					<td>
+						@product.Name
+					</td>
+					<td>
+						@product.Price.ToString("c");
+					</td>
+					<td>
+						@product.UnitsInStock
+					</td>
+					<td>
+						<a asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id">Ändra</a>
+					</td>
+				</tr>
+			}
+
+		</tbody>
+
+	</table>
+
+
+
+
+</div>
