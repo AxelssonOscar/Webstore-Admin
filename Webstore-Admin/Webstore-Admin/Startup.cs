@@ -32,6 +32,7 @@ namespace Webstore_Admin
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IDashboardRepository, DashboardRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +59,7 @@ namespace Webstore_Admin
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
             });
         }
     }

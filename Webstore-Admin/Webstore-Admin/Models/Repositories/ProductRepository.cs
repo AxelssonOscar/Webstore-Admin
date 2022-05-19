@@ -41,7 +41,6 @@ namespace Webstore_Admin.Models.Repositories
                 result.Name = product.Name;
                 result.Price = product.Price;
                 result.UnitsInStock = product.UnitsInStock;
-                result.CategoryId = product.CategoryId;
                 await _context.SaveChangesAsync();
                 return result;
             }

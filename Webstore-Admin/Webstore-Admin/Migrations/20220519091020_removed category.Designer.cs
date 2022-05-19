@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Webstore_Admin.Data.Contexts;
 
 namespace Webstore_Admin.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220519091020_removed category")]
+    partial class removedcategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,18 +141,6 @@ namespace Webstore_Admin.Migrations
 
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
-
-                    b.Property<DateTime>("OrderCreated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("Temperature")
-                        .HasColumnType("float");
-
-                    b.Property<string>("WeatherType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("WindSpeed")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
