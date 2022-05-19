@@ -24,8 +24,6 @@ namespace Webstore_Admin.Models
 
         public ICollection<Discount> Discounts { get; set; }
 
-      
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+     
     }
 }
