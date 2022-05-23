@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Webstore_Admin.Models.Contracts;
+using Webstore_Admin.Data;
 
 namespace Webstore_Admin.Controllers
 {
@@ -27,6 +28,7 @@ namespace Webstore_Admin.Controllers
         {
             return View(await _dashboardRepository.LowStockAsync());
         }
+
 
 
 

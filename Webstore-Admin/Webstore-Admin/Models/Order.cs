@@ -12,7 +12,7 @@ namespace Webstore_Admin.Models
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
 
-        public DateTime OrderCreated { get; set; } = DateTime.Now;
+        public DateTime OrderCreated { get; set; }
 
         public string WeatherType { get; set; }
         public double Temperature { get; set; }

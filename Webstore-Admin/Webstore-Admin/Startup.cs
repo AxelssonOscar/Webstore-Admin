@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webstore_Admin.Data;
 using Webstore_Admin.Data.Contexts;
 using Webstore_Admin.Models.Contracts;
 using Webstore_Admin.Models.Repositories;
@@ -33,6 +34,9 @@ namespace Webstore_Admin
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IDashboardRepository, DashboardRepository>();
+
+            
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

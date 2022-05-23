@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webstore_Admin.Data;
 using Webstore_Admin.Data.Contexts;
 using Webstore_Admin.Models.Contracts;
 
@@ -20,7 +21,7 @@ namespace Webstore_Admin.Models.Repositories
         public async Task<IEnumerable<Product>> LowStockAsync() => 
             await _context.Products.Where(p => p.UnitsInStock < LOW_STOCK_VALUE).ToListAsync();
 
-        
+
 
     }
 }
