@@ -28,10 +28,16 @@ namespace Webstore_Admin.Controllers
             return View(product);
         }
 
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, Product product)
         {
             var result = await _productRepository.GetSingleAsync(id);
-            return View(result);
+
+            if (ModelState.IsValid)
+            {
+                await _productRepository.UpdateAsync(product);
+                return RedirectToAction("Index");
+            }
+            return View(result);            
         }
 
         public async Task<IActionResult> Delete(int id)
