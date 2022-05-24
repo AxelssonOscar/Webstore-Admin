@@ -6,9 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using Webstore_Admin.Models.Contracts;
 using Webstore_Admin.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Webstore_Admin.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
         private readonly IDashboardRepository _dashboardRepository;
