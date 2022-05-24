@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Order>
+
+@{ 
+    ViewData["Title"] = "Logg - Ordrar";
+}
+
+<h1 class="display-4 text-center">Lista med alla transaktioner</h1>
+<p class="text-center lead">där Admin kan klicka på en transaktion för att se alla varor i den beställningen</p>
+
+<table class="table table-sm">
+    <caption>Lista med alla transaktioner</caption>
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(x=>x.Id)</th>
+            <th>@Html.DisplayNameFor(x=>x.OrderCreated)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>#@order.Id</td>
+                <td>@Html.DisplayFor(x=> order.OrderCreated)</td>
+                <td>
+                    <a asp-controller="Admin" asp-action="OrderDetails" asp-route-id="@order.Id">Produkter</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
