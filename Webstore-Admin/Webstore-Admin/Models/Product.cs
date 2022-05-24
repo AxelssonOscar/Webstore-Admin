@@ -9,27 +9,24 @@ namespace Webstore_Admin.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Du måste ange namn...")]
-        [Display(Name = "Produkt Namn")]
+        [Required(ErrorMessage = "Please enter name...")]
+        [Display(Name = "Product Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Du måste ange pris...")]
-        [Display(Name = "Pris")]
+        [Required(ErrorMessage = "Please enter price...")]
+        [Display(Name = "Price")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
-        [Required(ErrorMessage = "Du måste ange antal i lager...")]
-        [Display(Name = "Antal i lager")]
+        [Required(ErrorMessage = "Please enter units in stock...")]
+        [Display(Name = "Units In Stock")]
         public int UnitsInStock { get; set; }
 
         [Required]
-        [Display(Name = "Kategori")]
+        [Display(Name = "Category")]
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-
         public ICollection<Discount> Discounts { get; set; }
-
-     
     }
 }

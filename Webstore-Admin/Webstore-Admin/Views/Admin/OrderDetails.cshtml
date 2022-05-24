@@ -1,11 +1,11 @@
 ﻿@model Order
 
 @{
-    ViewData["Title"] = "Orderdetaljer";
+    ViewData["Title"] = "Order Details";
 }
 
 <h1 class="display-4 text-center">Order #@Model.Id</h1>
-<p class="lead">Produkter</p>
+<p class="lead">Products</p>
 <ul class="list-group list-group-flush">
     @foreach (var product in Model.OrderDetails)
     {
@@ -15,4 +15,4 @@
     }
 </ul>
 
-<a asp-controller="Admin" asp-action="OrderList">Tillbaka</a>
+<a asp-controller="Admin" asp-action="OrderList">Back</a>

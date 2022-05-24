@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Order>
 
 @{ 
-    ViewData["Title"] = "Logg - Ordrar";
+    ViewData["Title"] = "Orders";
 }
 
 <h1 class="display-4 text-center">Lista med alla transaktioner</h1>
@@ -22,7 +22,7 @@
                 <td>#@order.Id</td>
                 <td>@Html.DisplayFor(x=> order.OrderCreated)</td>
                 <td>
-                    <a asp-controller="Admin" asp-action="OrderDetails" asp-route-id="@order.Id">Produkter</a>
+                    <a asp-controller="Admin" asp-action="OrderDetails" asp-route-id="@order.Id">View Products</a>
                 </td>
             </tr>
         }
