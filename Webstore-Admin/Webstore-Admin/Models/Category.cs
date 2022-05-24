@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Webstore_Admin.Models
 {
@@ -11,8 +7,8 @@ namespace Webstore_Admin.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Du måste ange namn...")]
-        [Display(Name = "Kategorinamn")]
+        [Required(ErrorMessage = "Please enter category name...")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
     }
 }

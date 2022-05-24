@@ -8,10 +8,10 @@ namespace Webstore_Admin.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name = "Antal")]
+        [Display(Name = "Amount")]
         public int Amount { get; set; }
 
-        [Display(Name = "Pris")]
+        [Display(Name = "Price")]
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 

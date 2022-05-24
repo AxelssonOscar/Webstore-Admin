@@ -10,7 +10,7 @@ namespace Webstore_Admin.Models
 
         [Required]
         [StringLength(50)]
-        [Display(Name = "Namn")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Required]
@@ -20,19 +20,19 @@ namespace Webstore_Admin.Models
 
         [Required]
         [StringLength(50)]
-        [Display(Name = "Stad")]
+        [Display(Name = "City")]
         public string City { get; set; }
 
         [Required]
         [StringLength(10)]
-        [Display(Name = "Postnummer")]
+        [Display(Name = "Zip Code")]
         public string ZipCode { get; set; }
 
         [Required]
-        [Display(Name = "E-post")]
+        [Display(Name = "Email Address")]
         public string Email { get; set; }
 
-        [Display(Name = "Telefonnummer")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
         public ICollection<Order> Orders { get; set; }
