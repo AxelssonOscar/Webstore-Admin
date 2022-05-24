@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +8,7 @@ using Webstore_Admin.Models.Contracts;
 
 namespace Webstore_Admin.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IOrderRepository _orderRepository;
