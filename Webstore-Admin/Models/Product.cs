@@ -10,7 +10,7 @@ namespace Webstore_Admin.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Please enter name...")]
-        [Display(Name = "Product Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
 
         [Required(ErrorMessage = "Please enter price...")]
@@ -19,7 +19,7 @@ namespace Webstore_Admin.Models
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Please enter units in stock...")]
-        [Display(Name = "Units In Stock")]
+        [Display(Name = "In Stock")]
         public int UnitsInStock { get; set; }
 
         [Required]

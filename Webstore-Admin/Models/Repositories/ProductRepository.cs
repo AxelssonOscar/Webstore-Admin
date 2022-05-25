@@ -48,7 +48,8 @@ namespace Webstore_Admin.Models.Repositories
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync() =>
-            await _context.Products.ToListAsync();
+            await _context.Products.Include(x =>x.Category).ToListAsync();
+
 
         public async Task<Product> GetSingleAsync(int id) =>
             await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
