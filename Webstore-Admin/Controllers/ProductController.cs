@@ -20,6 +20,13 @@ namespace Webstore_Admin.Controllers
             return View(await _productRepository.GetAllAsync());
         }
 
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Create(Product product)
         {
             if (ModelState.IsValid)
@@ -29,6 +36,8 @@ namespace Webstore_Admin.Controllers
             }
             return View(product);
         }
+
+
 
         public async Task<IActionResult> Edit(int id, Product product)
         {
