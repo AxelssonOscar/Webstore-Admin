@@ -57,7 +57,7 @@ namespace Webstore_Admin.Controllers
 
             if (result == null)
             {
-                return BadRequest("Ajabaja Titta detta gick inte!!");
+                return BadRequest();
             }
             return RedirectToAction("Index");
         }

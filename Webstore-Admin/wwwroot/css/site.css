@@ -11,7 +11,15 @@ a.navbar-brand {
 a {
   color: #0366d6;
 }
-
+/*kod nedan är skapad av björnligan*/
+.flex-container {
+    display: flex;
+    justify-content: center;
+}
+.row {
+    justify-content: center;
+}
+/*kod ovan är skapad av björnligan*/
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
