@@ -4,13 +4,13 @@
     ViewData["Title"] = "Products";
 }
 
-<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
+<div class="container p-1">
+    <div class="col-md-8 offset-md-2 p-1">
+        <div class="mx-auto p-4">
             <h1 class="text-secondary font-weight-light" style="text-align: center">Products</h1>
-        </div><br />
-        <div class="col-6 text-right">
-            <a asp-controller="Product" asp-action="Create" class="btn btn-success"><i class="bi-plus-circle"></i>
+        </div>
+        <div class="pb-2 text-right">
+            <a asp-controller="Product" asp-action="Create" class="btn btn-success pl-3"><i class="bi-plus-circle"></i>
                 Create New Product
             </a>
         </div>
@@ -41,7 +41,7 @@
 
                             <td class="align-middle">
                                 <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Edit" asp-route-id="@product.Id">Edit</a>
-                                @*| <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">Delete</a>*@
+                                | <a class="btn btn-danger" asp-controller="Product" asp-action="Delete" asp-route-id="@product.Id">Delete</a>
                             </td>
                         </tr>
                     }
