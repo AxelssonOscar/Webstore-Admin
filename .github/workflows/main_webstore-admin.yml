@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'Webstore-Admin'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_500BBDF1FFEE4A25974E2D2C74BFA6AC }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A4CAC2D915694C928F2834A284228D2C }}
           package: .
