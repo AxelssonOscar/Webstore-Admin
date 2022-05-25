@@ -1,0 +1,71 @@
+﻿@model Webstore_Admin.ViewModel.CustomerSearchViewModel
+
+
+@{
+    ViewData["Title"] = "Customer search";
+}
+
+<h1 class="text-center">Customer search</h1>
+<form asp-controller="Customer" asp-action="Index">
+    <div class="flex-container">
+        <div class="row">
+            <div class="column align-content-lg-start col-5">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="column align-content-center col-2">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+
+            </div>
+            <div class="column align-content-end col-3">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+        </div>
+    </div>
+    <div class="flex-container">
+        <div class="col-2">
+            <a class="btn btn-primary" asp-action="Index">Tillbaka</a>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Search" class="btn btn-primary" />
+        </div>
+    </div>
+</form>
+
+@if (Model.customers != null)
+{
+    <h2>Results</h2>
+    <h3>@Model.sum matches</h3>
+
+    <table class="table table-sm">
+        <caption>Lista med hittade kunder</caption>
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(x => x.Id)</th>
+                <th>@Html.DisplayNameFor(x => x.Name)</th>
+                <th>@Html.DisplayNameFor(x => x.City)</th>
+                <th>@Html.DisplayNameFor(x => x.Address)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Customer customer in Model.customers)
+            {
+                <tr>
+                    <td>#@customer.Id</td>
+                    <td>@customer.Name</td>
+                    <td>@customer.City</td>
+                    <td>@customer.Address</td>
+                    <td>
+                        <a asp-controller="Admin" asp-action="OrderList" asp-route-customerId="@customer.Id">View orders</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

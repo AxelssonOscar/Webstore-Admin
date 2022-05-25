@@ -17,9 +17,12 @@ namespace Webstore_Admin.Controllers
             _orderRepository = orderRepository;
         }
 
-        public IActionResult OrderList()
+        public IActionResult OrderList(int? customerId)
         {
-            return View(_orderRepository.GetOrders);
+            if (customerId == null)
+                return View(_orderRepository.GetOrders);
+            else
+                return View(_orderRepository.GetOrders.Where(x => x.CustomerId == customerId));
         }
         public IActionResult OrderDetails(int id)
         {

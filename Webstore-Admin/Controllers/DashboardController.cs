@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Webstore_Admin.Models.Contracts;
 using Webstore_Admin.Data;
 using Microsoft.AspNetCore.Authorization;
+using Webstore_Admin.ViewModel;
 
 namespace Webstore_Admin.Controllers
 {
@@ -20,15 +21,12 @@ namespace Webstore_Admin.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
-
-
-        public async Task<IActionResult> LowStock()
-        {
-            return View(await _dashboardRepository.LowStockAsync());
+            DashboardViewModel viewModel = new DashboardViewModel();
+            viewModel.TopCustomer = await _dashboardRepository.TopCustomer();
+            viewModel.LowStockProducts = await _dashboardRepository.LowStockAsync();
+            return View(viewModel);
         }
 
 

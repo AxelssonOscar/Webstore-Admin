@@ -1,6 +1,35 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-<h1>INDEX :)</h1>
+﻿@model Webstore_Admin.ViewModel.DashboardViewModel
+
+<h1>Dashboard</h1>
+<h2>Low stock products</h2>
+<div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Product name
+                </th>
+                <th>
+                    Units in stock
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Product product in Model.LowStockProducts)
+            {
+                <tr>
+                    <td>
+                        @product.Name
+                    </td>
+                    <td>
+                        @product.UnitsInStock
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<h2>Top customer for last month</h2>
+<h3>#@Model.TopCustomer.Item1.Id <a asp-controller="Customer" asp-action="Index" asp-route-customerId="@Model.TopCustomer.Item1.Id">@Model.TopCustomer.Item1.Name</a> - @Model.TopCustomer.Item2 kr </h3>
+
