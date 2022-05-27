@@ -5,66 +5,49 @@
 }
 
 
+
+
 <form method="post" asp-action="Create">
-    <div class="border p-3">
+    <div>
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
             <h2 class="text-secondary font-weight-light pl-3">Add Product</h2>
         </div>
 
-        <div class="row">
-            <div class="col-8">
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Name"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
+        <div class="flex-container">
+            <div class="row">
+                <div class="column col-2">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="Price"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="Price" class="form-control" />
-                        <span asp-validation-for="Price" class="text-danger"></span>
-                    </div>
+                <div class="column col-2">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="UnitsInStock"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="UnitsInStock" class="form-control" />
-                        <span asp-validation-for="UnitsInStock" class="text-danger"></span>
-                    </div>
+                <div class="column col-2">
+                    <label asp-for="UnitsInStock" class="control-label"></label>
+                    <input asp-for="UnitsInStock" class="form-control" />
+                    <span asp-validation-for="UnitsInStock" class="text-danger"></span>
                 </div>
 
-                <div class="form-group row">
-                    <div class="col-4">
-                        <label asp-for="CategoryId"></label>
-                    </div>
-                    <div class="col-8">
-                        <input asp-for="CategoryId" class="form-control" />
-                        <span asp-validation-for="CategoryId" class="text-danger"></span>
-                    </div>
+                <div class="column col-2">
+                    <label asp-for="CategoryId" class="control-label"></label>
+                    <input asp-for="CategoryId" class="form-control" />
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
                 </div>
+            </div>
+        </div>
 
-                <div class="form-group row">
-                    <div class="col-8 offset-4 row">
-
-                        <div class="col">
-                            <input type="submit" class="btn btn-info w-100" value="Create" />
-                        </div>
-                        <div class="col">
-                            <a asp-action="Index" class="btn btn-success w-100">Back</a>
-                        </div>
-                    </div>
-                </div>
+        <div class="flex-container">
+            <div class="col-2 p-3 text-center">
+                <a asp-action="Index" class="btn btn-primary">Back</a>
+            </div>
+            <div class="col-2 p-3 text-center">
+                <input type="submit" class="btn btn-primary" value="Create" />
             </div>
         </div>
     </div>
@@ -75,56 +58,114 @@
 
 @*----DET NEDAN SKA RADERAS NÄR/OM NYA KODEN (OVAN) FÅR OK------*@
 
+@*<div class="row">
+        <div class="col-8">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Price"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="UnitsInStock"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="UnitsInStock" class="form-control" />
+                    <span asp-validation-for="UnitsInStock" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="CategoryId"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="CategoryId" class="form-control" />
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-8 offset-4 row">
+
+                    <div class="col">
+                        <input type="submit" class="btn btn-info w-100" value="Create" />
+                    </div>
+                    <div class="col">
+                        <a asp-action="Index" class="btn btn-success w-100">Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
 
 @*<div class="container p-3">
-    <div class="row pt-4">
-        <div class="col-6">
-            <h1 class="text-secondary font-weight-light">Add Product</h1>
+        <div class="row pt-4">
+            <div class="col-6">
+                <h1 class="text-secondary font-weight-light">Add Product</h1>
+            </div>
         </div>
-    </div>
 
-    <div class="row pt-5">
-        <div class="col-6">
+        <div class="row pt-5">
+            <div class="col-6">
 
-            <form asp-action="Create">
-                <div class="row">
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <form asp-action="Create">
+                    <div class="row">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                    <div class="col">
-                        <label asp-for="Name" class="control-label"></label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                        <div class="col">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+
+                        <div class="col">
+                            <label asp-for="Price" class="control-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="col">
+                            <label asp-for="UnitsInStock" class="control-label"></label>
+                            <input asp-for="UnitsInStock" class="form-control" />
+                            <span asp-validation-for="UnitsInStock" class="text-danger"></span>
+                        </div>
+
+                        <div class="col">
+                            <label asp-for="CategoryId" class="control-label"></label>
+                            <input asp-for="CategoryId" class="form-control" />
+                            <span asp-validation-for="CategoryId" class="text-danger"></span>
+                        </div>
+
+
                     </div>
-
                     <div class="col">
-                        <label asp-for="Price" class="control-label"></label>
-                        <input asp-for="Price" class="form-control" />
-                        <span asp-validation-for="Price" class="text-danger"></span>
+                        <input type="submit" value="Save" class="btn btn-primary" />
                     </div>
-
                     <div class="col">
-                        <label asp-for="UnitsInStock" class="control-label"></label>
-                        <input asp-for="UnitsInStock" class="form-control" />
-                        <span asp-validation-for="UnitsInStock" class="text-danger"></span>
+                        <a asp-action="Index" class="=btn btn-success">Tillbaka</a>
                     </div>
-
-                    <div class="col">
-                        <label asp-for="CategoryId" class="control-label"></label>
-                        <input asp-for="CategoryId" class="form-control" />
-                        <span asp-validation-for="CategoryId" class="text-danger"></span>
-                    </div>
-
-
-                </div>
-                <div class="col">
-                    <input type="submit" value="Save" class="btn btn-primary" />
-                </div>
-                <div class="col">
-                    <a asp-action="Index" class="=btn btn-success">Tillbaka</a>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-    </div>
-</div>*@
-    
-   
+    </div>*@
+
+
