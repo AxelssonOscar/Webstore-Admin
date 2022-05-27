@@ -30,7 +30,7 @@ namespace Webstore_Admin.Controllers
 
             if (order == null)
             {
-                return NotFound();
+                return View("NotFound");
             }
             else
             {
