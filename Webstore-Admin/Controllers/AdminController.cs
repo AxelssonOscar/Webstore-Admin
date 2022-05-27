@@ -4,7 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webstore_Admin.Models;
 using Webstore_Admin.Models.Contracts;
+using Webstore_Admin.Models.Helpers;
 
 namespace Webstore_Admin.Controllers
 {
@@ -21,6 +23,13 @@ namespace Webstore_Admin.Controllers
         {
             if (customerId == null)
                 return View(_orderRepository.GetOrders);
+            else
+                return View(_orderRepository.GetOrders.Where(x => x.CustomerId == customerId));
+        }
+        public async Task<IActionResult> OrderListPaged(int? customerId, int pageNumber = 1, int pageSize = 10)
+        {
+            if (customerId == null)
+                return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll, pageNumber, pageSize));
             else
                 return View(_orderRepository.GetOrders.Where(x => x.CustomerId == customerId));
         }

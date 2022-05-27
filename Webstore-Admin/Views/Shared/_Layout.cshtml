@@ -29,7 +29,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Produkter</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="OrderList">Transaktioner</a>
+                            @*<a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="OrderList">Orders</a>*@
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="OrderListPaged">Orders</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Index">Kunder</a>
