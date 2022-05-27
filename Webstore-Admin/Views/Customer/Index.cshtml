@@ -62,6 +62,9 @@
                     <td>@customer.City</td>
                     <td>@customer.Address</td>
                     <td>
+                    <a asp-controller="Customer" asp-action="Details" asp-route-customerId="@customer.Id">Detailed view</a>
+                    </td>
+                    <td>
                         <a asp-controller="Admin" asp-action="OrderList" asp-route-customerId="@customer.Id">View orders</a>
                     </td>
                 </tr>

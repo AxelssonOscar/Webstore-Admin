@@ -28,6 +28,8 @@ namespace Webstore_Admin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -36,6 +38,7 @@ namespace Webstore_Admin
             services.AddScoped<IDashboardRepository, DashboardRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IApiRepository, ApiRepository>();
 
             services.AddHttpContextAccessor();
             services.AddSession();

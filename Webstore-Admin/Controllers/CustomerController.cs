@@ -35,6 +35,12 @@ namespace Webstore_Admin.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> Details(int customerId)
+        {
+            return View(await _customerRepository.GetSingle(customerId));
+        }
+
+
 
     }
 }
