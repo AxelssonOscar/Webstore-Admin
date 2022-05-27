@@ -16,6 +16,7 @@ namespace Webstore_Admin.Models
         [Required(ErrorMessage = "Please enter price...")]
         [Display(Name = "Price")]
         [Column(TypeName = "decimal(18,2)")]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Please enter units in stock...")]
