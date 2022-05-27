@@ -1,1 +1,28 @@
-﻿
+﻿@model Webstore_Admin.ViewModel.CustomerDetailsViewModel
+
+
+<div class="container">
+    <div class="row">
+        Name - @Model.customer.Name
+    </div>
+    <div class="row">
+        City - @Model.customer.City
+    </div>
+    <div class="row">
+        Address - @Model.customer.Address
+    </div>
+    <div class="row">
+        Email - @Model.customer.Email
+    </div>
+    <div class="row">
+        Phone number - @Model.customer.PhoneNumber
+    </div>
+    <div class="row">
+        Distance - @Model.distance
+    </div>
+    <div class="row">
+        <a asp-controller="Admin" asp-action="OrderList" asp-route-customerId="@Model.customer.Id">View orders</a>
+    </div>
+
+
+</div>

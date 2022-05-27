@@ -37,9 +37,13 @@ namespace Webstore_Admin.Controllers
 
         public async Task<IActionResult> Details(int customerId)
         {
-            return View(await _customerRepository.GetSingle(customerId));
-        }
+            CustomerDetailsViewModel viewModel = new CustomerDetailsViewModel();
 
+            var result = await _customerRepository.GetSingleAndDistanceAsync(customerId);
+            viewModel.customer = result.Item1;
+            viewModel.distance = result.Item2;
+            return View(viewModel);
+        }
 
 
     }
