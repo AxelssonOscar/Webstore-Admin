@@ -2,10 +2,12 @@
 
 
 @{
-    ViewData["Title"] = "Customer search";
+    ViewData["Title"] = "Customer Search -";
 }
 
-<h1 class="text-center">Customer search</h1>
+<div class="p-4">
+    <h1 class="display-4 text-center">Customer Search</h1>
+</div>
 <form asp-controller="Customer" asp-action="Index">
     <div class="flex-container">
         <div class="row">
@@ -30,7 +32,7 @@
     </div>
     <div class="flex-container">
         <div class="col-2">
-            <a class="btn btn-primary" asp-action="Index">Tillbaka</a>
+            <a class="btn btn-primary" asp-action="Index">Back</a>
         </div>
         <div class="form-group">
             <input type="submit" value="Search" class="btn btn-primary" />

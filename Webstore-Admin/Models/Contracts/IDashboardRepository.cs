@@ -9,7 +9,7 @@ namespace Webstore_Admin.Models.Contracts
     public interface IDashboardRepository
     {
         Task<IEnumerable<Product>> LowStockAsync();
-        Task<List<KeyValuePair<Customer, decimal>>> TopCustomer();
+        Task<List<KeyValuePair<Customer, decimal?>>> TopCustomer();
 
     }
 }

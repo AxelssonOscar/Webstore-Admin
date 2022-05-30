@@ -21,10 +21,10 @@ namespace Webstore_Admin.Models.Repositories
         public async Task<IEnumerable<Product>> LowStockAsync() =>
             await _context.Products.Where(p => p.UnitsInStock < LOW_STOCK_VALUE).ToListAsync();
 
-        public async Task<List<KeyValuePair<Customer, decimal>>> TopCustomer()
+        public async Task<List<KeyValuePair<Customer, decimal?>>> TopCustomer()
         {
 
-            Dictionary<Customer, decimal> customers = new Dictionary<Customer, decimal>();
+            Dictionary<Customer, decimal?> customers = new Dictionary<Customer, decimal?>();
 
             var orders = await _context.Orders.Where(o => o.OrderCreated > DateTime.Now.AddMonths(-1)).Include(o => o.Customer).Include(o => o.OrderDetails).ThenInclude(o => o.Product).ToListAsync();
 
@@ -41,7 +41,7 @@ namespace Webstore_Admin.Models.Repositories
                 else
                 {
                     Customer customer = order.Customer;
-                    decimal sum = 0;
+                    decimal? sum = 0;
                     foreach (OrderDetail orderDetail in order.OrderDetails)
                     {
                         sum += orderDetail.Price;

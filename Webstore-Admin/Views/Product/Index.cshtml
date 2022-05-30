@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Product>
 
 @{
-    ViewData["Title"] = "Products";
+    ViewData["Title"] = "Products -";
 }
 
 <div class="container p-1">
     <div class="col-md-8 offset-md-2 p-1">
-        <div class="mx-auto p-4">
-            <h1 class="text-secondary font-weight-light" style="text-align: center">Products</h1>
+        <div class="p-4">
+            <h1 class="display-4 text-center">Products</h1>
         </div>
         <div class="pb-2 text-right">
             <a asp-controller="Product" asp-action="Create" class="btn btn-success pl-3"><i class="bi-plus-circle"></i>
@@ -33,7 +33,7 @@
                 {
                     <tr> 
                         <td class="align-middle">@product.Name</td>
-                        <td class="align-middle">@product.Price.ToString("c")</td>
+                        <td class="align-middle">@product.Price kr</td>
                         <td class="align-middle">@product.UnitsInStock</td>
                         <td class="align-middle">@product.Category.Name</td>
 

@@ -27,18 +27,30 @@ namespace Webstore_Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(Product product)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id, Name, Price, UnitsInStock, CategoryId")]Product product)
         {
             if (ModelState.IsValid)
             {
                 await _productRepository.AddAsync(product);
-                return RedirectToAction("Index");
+                return RedirectToAction(nameof(Index));
             }
             return View(product);
         }
 
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var result = await _productRepository.GetSingleAsync(id);
+            if (result == null)
+            {
+                return View("NotFound");
+            }
 
+            return View(result);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Edit(int id, Product product)
         {
             var result = await _productRepository.GetSingleAsync(id);

@@ -1,17 +1,14 @@
 ﻿@model Product
 
 @{
-    ViewData["Title"] = "Add Product";
+    ViewData["Title"] = "Add Product -";
 }
 
 
-
-
 <form method="post" asp-action="Create">
-    <div>
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
-            <h2 class="text-secondary font-weight-light pl-3">Add Product</h2>
+            <h2 class="display-4 text-center pl-3">Add Product</h2>
         </div>
 
         <div class="flex-container">
@@ -50,7 +47,6 @@
                 <input type="submit" class="btn btn-primary" value="Create" />
             </div>
         </div>
-    </div>
 </form>
 
 
