@@ -8,7 +8,8 @@ namespace Webstore_Admin.ViewModel
 {
     public class DashboardViewModel
     {
-        public Tuple<Customer, decimal> TopCustomer { get; set; }
+
+        public List<KeyValuePair<Customer, decimal>> TopCustomer { get; set; }
         public IEnumerable<Product> LowStockProducts { get; set; }
     }
 }

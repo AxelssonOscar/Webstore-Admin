@@ -21,7 +21,7 @@ namespace Webstore_Admin.Models.Repositories
         public async Task<IEnumerable<Product>> LowStockAsync() =>
             await _context.Products.Where(p => p.UnitsInStock < LOW_STOCK_VALUE).ToListAsync();
 
-        public async Task<Tuple<Customer, decimal>> TopCustomer()
+        public async Task<List<KeyValuePair<Customer, decimal>>> TopCustomer()
         {
 
             Dictionary<Customer, decimal> customers = new Dictionary<Customer, decimal>();
@@ -50,13 +50,13 @@ namespace Webstore_Admin.Models.Repositories
                 }
             }
 
-            var highestSum = customers.Select(c => c).Max(c => c.Value);
+            var sortedCustomers = from entry in customers orderby entry.Value descending select entry;
 
-            var highestCustomer = customers.Where(c => c.Value == highestSum).Select(c => c.Key).First();
+            var top5Customers = sortedCustomers.Select(c => c).Take(5).ToList();
 
-            Tuple<Customer, decimal> result = Tuple.Create(highestCustomer, highestSum);
+            //Tuple<Customer, decimal> result = Tuple.Create(highestCustomer, highestSum);
 
-            return result;
+            return top5Customers;
         }
 
 
