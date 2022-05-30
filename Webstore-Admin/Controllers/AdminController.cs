@@ -19,14 +19,7 @@ namespace Webstore_Admin.Controllers
             _orderRepository = orderRepository;
         }
 
-        public IActionResult OrderList(int? customerId)
-        {
-            if (customerId == null)
-                return View(_orderRepository.GetOrders);
-            else
-                return View(_orderRepository.GetOrders.Where(x => x.CustomerId == customerId));
-        }
-        public async Task<IActionResult> OrderListPaged(int? customerId, int pageNumber = 1, int pageSize = 10)
+        public async Task<IActionResult> OrderList(int? customerId, int pageNumber = 1, int pageSize = 10)
         {
             if (customerId == null)
                 return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll, pageNumber, pageSize));
