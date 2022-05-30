@@ -5,12 +5,13 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Webstore_Admin.Models;
+using Webstore_Admin.Models.Helpers;
 
 namespace Webstore_Admin.ViewModel
 {
     public class CustomerSearchViewModel
     {
-        public IEnumerable<Customer> customers { get; set; }
+        public PaginatedList<Customer> customers { get; set; }
         public int sum { get; set; }
 
         [Display(Name = "Id")]

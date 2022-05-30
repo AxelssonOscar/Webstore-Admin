@@ -18,18 +18,15 @@ namespace Webstore_Admin.Models.Repositories
             _context = context;
         }
 
-        public async Task<IEnumerable<Customer>> Search(string name, string city, string address)
-        {
-            List<Customer> customers = await _context.Customers.Where(c => c.Address.Contains(address)
-                                                                        || c.City.Contains(city)
-                                                                        || c.Name.Contains(name))
-                                                                        .Include(c => c).ToListAsync();
+        public IQueryable<Customer> Search(string name, string city, string address) =>
+            _context.Customers.Where(c => c.Address.Contains(address)
+                                        || c.City.Contains(city)
+                                        || c.Name.Contains(name))
+                                        .Include(c => c);
 
-            return customers;
-        }
 
-        public async Task<IEnumerable<Customer>> GetSingle(int id) =>
-            await _context.Customers.Where(c => c.Id == id).ToListAsync();
+        public IQueryable<Customer> GetSingle(int? id) =>
+            _context.Customers.Where(c => c.Id == id);
 
 
 

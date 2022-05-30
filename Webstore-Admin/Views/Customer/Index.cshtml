@@ -41,16 +41,46 @@
 @if (Model.customers != null)
 {
     <h2>Results</h2>
-    <h3>@Model.sum matches</h3>
+    <h3>@Model.customers.TotalCount matches</h3>
 
     <table class="table table-sm">
-        <caption>Lista med hittade kunder</caption>
         <thead>
             <tr>
-                <th>@Html.DisplayNameFor(x => x.Id)</th>
-                <th>@Html.DisplayNameFor(x => x.Name)</th>
-                <th>@Html.DisplayNameFor(x => x.City)</th>
-                <th>@Html.DisplayNameFor(x => x.Address)</th>
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder=""
+                       asp-route-pageOrder="@Model.customers.PageIndex"
+                       asp-route-name="@Model.Name"
+                       asp-route-city="@Model.City"
+                       asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Id)</a>
+                </th>
+
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="name_asc"
+                       asp-route-pageOrder="@Model.customers.PageIndex"
+                       asp-route-name="@Model.Name"
+                       asp-route-city="@Model.City"
+                       asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Name)</a>
+                </th>
+
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="city_asc"
+                       asp-route-pageOrder="@Model.customers.PageIndex"
+                       asp-route-name="@Model.Name"
+                       asp-route-city="@Model.City"
+                       asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.City)</a>
+                </th>
+
+                <th>
+                    <a asp-action="Index"
+                       asp-route-sortOrder="address_asc"
+                       asp-route-pageOrder="@Model.customers.PageIndex"
+                       asp-route-name="@Model.Name"
+                       asp-route-city="@Model.City"
+                       asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Address)</a>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -68,4 +98,33 @@
             }
         </tbody>
     </table>
+
+    var prevDisabled = !Model.customers.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.customers.HasNextPage ? "disabled" : "";
+
+    <div class="container p-1">
+        <div class="col-md-8 offset-md-2 p-1">
+            <div class="btn-group">
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.customers.PageIndex - 1)"
+                   asp-route-sortOrder="@Model.customers.SortOrder"
+                   asp-route-name="@Model.Name"
+                   asp-route-city="@Model.City"
+                   asp-route-address="@Model.Address"
+                   class="btn btn-outline-primary @prevDisabled">
+                    Previous
+                </a>
+                <a asp-action="Index"
+                   asp-route-pageNumber="@(Model.customers.PageIndex + 1)"
+                   asp-route-sortOrder="@Model.customers.SortOrder"
+                   asp-route-name="@Model.Name"
+                   asp-route-city="@Model.City"
+                   asp-route-address="@Model.Address"
+                   class="btn btn-outline-primary @nextDisabled">
+                    Next
+                </a>
+            </div>
+        </div>
+    </div>
+
 }

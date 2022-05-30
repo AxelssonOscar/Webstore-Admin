@@ -22,7 +22,7 @@ namespace Webstore_Admin.Controllers
         public async Task<IActionResult> OrderList(int? customerId, int pageNumber = 1, int pageSize = 10)
         {
             if (customerId == null)
-                return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll, pageNumber, pageSize));
+                return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll, pageNumber, pageSize, ""));
             else
                 return View(_orderRepository.GetOrders.Where(x => x.CustomerId == customerId));
         }
