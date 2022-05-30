@@ -38,12 +38,12 @@
 <div class="container p-1">
     <div class="col-md-8 offset-md-2 p-1">
         <div class="btn-group">
-            <a asp-action="OrderListPaged"
+            <a asp-action="OrderList"
                asp-route-pageNumber="@(Model.PageIndex - 1)"
                class="btn btn-outline-primary @prevDisabled">
                 Previous
             </a>
-            <a asp-action="OrderListPaged"
+            <a asp-action="OrderList"
                asp-route-pageNumber="@(Model.PageIndex + 1)"
                class="btn btn-outline-primary @nextDisabled">
                 Next
