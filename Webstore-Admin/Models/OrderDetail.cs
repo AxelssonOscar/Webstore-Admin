@@ -9,11 +9,11 @@ namespace Webstore_Admin.Models
         public int Id { get; set; }
 
         [Display(Name = "Amount")]
-        public int Amount { get; set; }
+        public int? Amount { get; set; }
 
         [Display(Name = "Price")]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         public int OrderId { get; set; }
         public Order Order { get; set; }

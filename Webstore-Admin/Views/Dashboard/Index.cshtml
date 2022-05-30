@@ -3,8 +3,8 @@
 
 <div class="container p-1">
     <div class="col-md-8 offset-md-2 p-1">
-        <div class="mx-auto p-4">
-            <h1 class="text-secondary font-weight-light" style="text-align: center">Dashboard</h1>
+        <div class="p-4">
+            <h1 class="display-4 text-center">Dashboard</h1>
         </div>
     </div>
 
@@ -46,7 +46,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (KeyValuePair<Customer, decimal> data in Model.TopCustomer)
+                        @foreach (KeyValuePair<Customer, decimal?> data in Model.TopCustomer)
                         {
                             <tr>
                                 <td style="text-align:center"> #@data.Key.Id</td>
