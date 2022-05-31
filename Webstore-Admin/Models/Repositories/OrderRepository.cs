@@ -14,7 +14,7 @@ namespace Webstore_Admin.Models.Repositories
             _context = context;
         }
         public IEnumerable<Order> GetOrders =>
-            _context.Orders.Include(x => x.OrderDetails).ThenInclude(x => x.Product);
+            _context.Orders.Include(x => x.Customer).Include(x => x.OrderDetails).ThenInclude(x => x.Product);
 
         public IQueryable<Order> GetAll =>
             _context.Orders.Include(x => x.OrderDetails).ThenInclude(x => x.Product);

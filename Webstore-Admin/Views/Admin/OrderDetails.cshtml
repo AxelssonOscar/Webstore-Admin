@@ -9,7 +9,18 @@
         <h1 class="display-4 text-center">Order #@Model.Id</h1>
     </div>
 
-    <div class="col-md-8 offset-md-2 p-1">
+    <div class="col-md-8 offset-md-2 p-3">
+        <div>
+            <p class="p-2">
+                @Model.Customer.Name <br />
+                @Model.Customer.Address, @Model.Customer.City <br />
+                @Model.Customer.Email <br />
+                @Model.Customer.PhoneNumber
+            </p>
+        </div>
+    </div>
+
+    <div class="col-md-8 offset-md-2 p-3">
         <table class="table">
             <thead>
                 <tr>
@@ -22,13 +33,13 @@
             <tbody>
                 @foreach (var product in Model.OrderDetails)
                 {
-                <tr>
-                    <td>@product.Product.Name</td>
-                    <td> x @product.Amount</td>
-                    <td>@product.Product.Price kr</td>
-                     @*---IF NOT USED, REMOVE THIS DECLARATION AND LEAVE CALC---*@
-                    <td>@{var total = (product.Product.Price * product.Amount); } @total kr</td>
-                </tr>
+                    <tr>
+                        <td>@product.Product.Name</td>
+                        <td> x @product.Amount</td>
+                        <td>@product.Product.Price kr</td>
+                        @*---IF NOT USED, REMOVE THIS DECLARATION AND LEAVE CALC---*@
+                        <td>@{var total = (product.Product.Price * product.Amount); } @total kr</td>
+                    </tr>
                 }
                 <tr>
                     <td>TOTAL: </td>
@@ -41,8 +52,8 @@
     </div>
 </div>
 
-<div class="container p-1">
-    <div class="col-md-8 offset-md-2 p-1">
+<div class="container p-3">
+    <div class="col-md-8 offset-md-2 p-3">
         <a class="btn btn-outline-primary" asp-controller="Admin" asp-action="OrderList">Back</a>
     </div>
 </div>
