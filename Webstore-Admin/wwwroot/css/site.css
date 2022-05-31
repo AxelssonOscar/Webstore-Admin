@@ -14,6 +14,7 @@ a {
 /*kod nedan är skapad av björnligan*/
 .flex-container {
     display: flex;
+    margin-bottom: 1%;
     justify-content: center;
 }
 .row {
