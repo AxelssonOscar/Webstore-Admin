@@ -59,7 +59,39 @@ namespace Webstore_Admin.Models.Repositories
             return top5Customers;
         }
 
+        public async Task<List<KeyValuePair<string, int?>>> MostSoldProducts()
+        {
 
+            Dictionary<string, int?> products = new Dictionary<string, int?>();            
+
+            var orders = await _context.Orders.Where(o => o.OrderCreated > DateTime.Now.AddMonths(-1)).ToListAsync();
+
+
+            foreach (Order order in orders)
+            {
+                for (int i = 0; i < order.OrderDetails.Count; i++)
+                {
+                    var productName = order.OrderDetails.Select(p => p.Product.Name).ElementAtOrDefault(i);
+                    var amount = order.OrderDetails.Select(a => a.Amount).ElementAtOrDefault(i);
+                    if (!products.ContainsKey(productName))
+                    {
+                        products.Add(productName, amount);
+
+                    }
+                    else
+                    {
+                        products[productName] += amount;
+                    }
+                }
+
+            }
+
+            var sortedProducts = from entry in products orderby entry.Value descending select entry;
+
+            var top5SoldProducts = sortedProducts.Select(p => p).Take(5).ToList();
+
+            return top5SoldProducts;
+        }        
 
     }
 }

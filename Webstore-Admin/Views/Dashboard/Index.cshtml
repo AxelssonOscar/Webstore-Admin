@@ -65,23 +65,24 @@
         @*---Row 1, Card 3---*@
         <div class="card bg-warning m-2 w-25 col-sm">
             <div class="card-body p-3">
-                <h4 class="card-title" style="text-align: center">Enter new data</h4>
+                <h4 class="card-title" style="text-align: center">Top 5 products last month</h4>
                 <table class="w-100">
                     <thead>
                         <tr>
-                            <th style="text-align:center">ID</th>
-                            <th style="text-align:center">Name</th>
-                            <th style="text-align:center">Amount</th>
+                            <th style="text-align:center">Product</th>
+                            <th style="text-align:center">Sold</th>
+                            @*<th style="text-align:center">Amount</th>*@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td style="text-align:center"> #Id</td>
-                            <td style="text-align:center">
-                                Namn
-                            </td>
-                            <td style="text-align:center">kr</td>
-                        </tr>
+                        @foreach (KeyValuePair<string, int?> data in Model.MostSoldProducts)
+                        {
+                            <tr>
+                                <td style="text-align:center"> @data.Key</td>
+                                @*<td style="text-align:center"> <a asp-controller="Customer" asp-action="Index" asp-route-customerId="@data.Key.Id">@data.Key.Name</a></td>*@
+                                <td style="text-align:center">  @data.Value</td>
+                            </tr>
+                        }                        
                     </tbody>
                 </table>
             </div>
