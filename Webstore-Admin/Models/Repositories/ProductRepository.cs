@@ -20,19 +20,6 @@ namespace Webstore_Admin.Models.Repositories
             await _context.SaveChangesAsync();
             return entity.Entity;
         }
-
-        public async Task<Product> DeleteAsync(int id)
-        {
-            var product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
-            if (product != null)
-            {
-                _context.Products.Remove(product);
-                await _context.SaveChangesAsync();
-                return product;
-            }
-            return null;
-        }
-
         public async Task<Product> UpdateAsync(Product product)
         {
             var result = await _context.Products.FirstOrDefaultAsync(p => p.Id == product.Id);

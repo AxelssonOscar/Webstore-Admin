@@ -7,8 +7,6 @@ namespace Webstore_Admin.Models.Contracts
     {
         Task<Product> AddAsync(Product product);
         Task<Product> UpdateAsync(Product product);
-        Task<Product> DeleteAsync(int id);
-
         Task<IEnumerable<Product>> GetAllAsync();
 
         Task<Product> GetSingleAsync(int id);
