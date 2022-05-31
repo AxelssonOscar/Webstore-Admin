@@ -1,15 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Webstore_Admin.Data;
 using Webstore_Admin.Data.Contexts;
 using Webstore_Admin.Models.Contracts;
 using Webstore_Admin.Models.Repositories;
@@ -28,8 +22,6 @@ namespace Webstore_Admin
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
-
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -39,11 +31,11 @@ namespace Webstore_Admin
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IApiRepository, ApiRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
 
             services.AddHttpContextAccessor();
             services.AddSession();
             services.AddRazorPages();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
