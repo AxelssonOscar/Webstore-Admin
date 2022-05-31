@@ -1,18 +1,48 @@
 ﻿@model Order
 
 @{
-    ViewData["Title"] = "Order Details";
+    ViewData["Title"] = "Order Details -";
 }
 
-<h1 class="display-4 text-center">Order #@Model.Id</h1>
-<p class="lead">Products</p>
-<ul class="list-group list-group-flush">
-    @foreach (var product in Model.OrderDetails)
-    {
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            @product.Product.Name <span class="badge bg-info rounded-pill text-light"> x @product.Amount</span>
-        </li>
-    }
-</ul>
+<div class="container p-1">
+    <div class="p-4">
+        <h1 class="display-4 text-center">Order #@Model.Id</h1>
+    </div>
 
-<a asp-controller="Admin" asp-action="OrderList">Back</a>
+    <div class="col-md-8 offset-md-2 p-1">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><p class="lead">Product</p></th>
+                    <th><p class="lead">Amount</p></th>
+                    <th><p class="lead">Unit Price</p></th>
+                    <th><p class="lead">Total</p></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.OrderDetails)
+                {
+                <tr>
+                    <td>@product.Product.Name</td>
+                    <td> x @product.Amount</td>
+                    <td>@product.Product.Price kr</td>
+                     @*---IF NOT USED, REMOVE THIS DECLARATION AND LEAVE CALC---*@
+                    <td>@{var total = (product.Product.Price * product.Amount); } @total kr</td>
+                </tr>
+                }
+                <tr>
+                    <td>TOTAL: </td>
+                    <td></td>
+                    <td></td>
+                    <td>SUMMA </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container p-1">
+    <div class="col-md-8 offset-md-2 p-1">
+        <a class="btn btn-outline-primary" asp-controller="Admin" asp-action="OrderList">Back</a>
+    </div>
+</div>
