@@ -4,7 +4,6 @@
     ViewData["Title"] = "Add Product -";
 }
 
-
 <form method="post" asp-action="Create">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
@@ -33,7 +32,7 @@
 
                 <div class="column col-2">
                     <label asp-for="CategoryId" class="control-label"></label>
-                    <input asp-for="CategoryId" class="form-control" />
+                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
                 </div>
             </div>
@@ -48,120 +47,3 @@
             </div>
         </div>
 </form>
-
-
-
-
-@*----DET NEDAN SKA RADERAS NÄR/OM NYA KODEN (OVAN) FÅR OK------*@
-
-@*<div class="row">
-        <div class="col-8">
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Name"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Price"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="Price" class="form-control" />
-                    <span asp-validation-for="Price" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="UnitsInStock"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="UnitsInStock" class="form-control" />
-                    <span asp-validation-for="UnitsInStock" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="CategoryId"></label>
-                </div>
-                <div class="col-8">
-                    <input asp-for="CategoryId" class="form-control" />
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-8 offset-4 row">
-
-                    <div class="col">
-                        <input type="submit" class="btn btn-info w-100" value="Create" />
-                    </div>
-                    <div class="col">
-                        <a asp-action="Index" class="btn btn-success w-100">Back</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>*@
-
-
-
-
-@*<div class="container p-3">
-        <div class="row pt-4">
-            <div class="col-6">
-                <h1 class="text-secondary font-weight-light">Add Product</h1>
-            </div>
-        </div>
-
-        <div class="row pt-5">
-            <div class="col-6">
-
-                <form asp-action="Create">
-                    <div class="row">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-                        <div class="col">
-                            <label asp-for="Name" class="control-label"></label>
-                            <input asp-for="Name" class="form-control" />
-                            <span asp-validation-for="Name" class="text-danger"></span>
-                        </div>
-
-                        <div class="col">
-                            <label asp-for="Price" class="control-label"></label>
-                            <input asp-for="Price" class="form-control" />
-                            <span asp-validation-for="Price" class="text-danger"></span>
-                        </div>
-
-                        <div class="col">
-                            <label asp-for="UnitsInStock" class="control-label"></label>
-                            <input asp-for="UnitsInStock" class="form-control" />
-                            <span asp-validation-for="UnitsInStock" class="text-danger"></span>
-                        </div>
-
-                        <div class="col">
-                            <label asp-for="CategoryId" class="control-label"></label>
-                            <input asp-for="CategoryId" class="form-control" />
-                            <span asp-validation-for="CategoryId" class="text-danger"></span>
-                        </div>
-
-
-                    </div>
-                    <div class="col">
-                        <input type="submit" value="Save" class="btn btn-primary" />
-                    </div>
-                    <div class="col">
-                        <a asp-action="Index" class="=btn btn-success">Tillbaka</a>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>*@
-
-

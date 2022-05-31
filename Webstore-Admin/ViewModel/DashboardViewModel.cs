@@ -11,5 +11,7 @@ namespace Webstore_Admin.ViewModel
         public List<KeyValuePair<Customer, decimal?>> TopCustomer { get; set; }
         public IEnumerable<Product> LowStockProducts { get; set; }
         public List<KeyValuePair<string, int?>> MostSoldProducts { get; set; }
+
+        public List<decimal?> TotalSalesMonth { get; set; }
     }
 }

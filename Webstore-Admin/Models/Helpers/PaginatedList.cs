@@ -13,12 +13,26 @@ namespace Webstore_Admin.Models.Helpers
         public string SortOrder { get; set; }
         public int TotalCount { get; set; }
 
+        public List<int> PreviousPages = new List<int>();
+        public List<int> NextPages = new List<int>();
+
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize, string sortOrder)
         {
             PageIndex = pageIndex;
             TotalCount = count;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
             SortOrder = sortOrder;
+
+            for (int i = pageIndex - 1; i > pageIndex - 6 && i > 0; i--)
+            {
+                PreviousPages.Add(i);
+            }
+            PreviousPages.Reverse();
+
+            for (int i = pageIndex + 1; i < PageIndex + 6 && i < TotalPages; i++)
+            {
+                NextPages.Add(i);
+            }
 
             AddRange(items);
         }

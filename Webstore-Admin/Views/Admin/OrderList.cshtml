@@ -46,6 +46,40 @@
                 Previous
             </a>
             <a asp-action="OrderList"
+               asp-route-pageNumber="1"
+               class="btn btn-outline-primary @prevDisabled">
+                1
+            </a>
+            @foreach (var number in Model.PreviousPages)
+            {
+                <a asp-action="OrderList"
+                   asp-route-pageNumber="@number"
+                   class="btn btn-outline-primary">
+                    @number
+                </a>
+            }
+            @if (Model.PageIndex != 1 && Model.PageIndex != Model.TotalPages)
+            {
+                <a asp-action="OrderList"
+                   asp-route-pageNumber="@Model.PageIndex"
+                   class="btn btn-outline-primary disabled">
+                    @Model.PageIndex
+                </a>
+            }
+            @foreach (var item in Model.NextPages)
+            {
+                <a asp-action="OrderList"
+                   asp-route-pageNumber="@item"
+                   class="btn btn-outline-primary">
+                    @item
+                </a>
+            }
+            <a asp-action="OrderList"
+               asp-route-pageNumber="@Model.TotalPages"
+               class="btn btn-outline-primary @nextDisabled">
+                @Model.TotalPages
+            </a>
+            <a asp-action="OrderList"
                asp-route-pageNumber="@(Model.PageIndex + 1)"
                class="btn btn-outline-primary @nextDisabled">
                 Next
