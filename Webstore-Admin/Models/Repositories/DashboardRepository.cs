@@ -93,9 +93,9 @@ namespace Webstore_Admin.Models.Repositories
             return top5SoldProducts;
         }
 
-        public async Task<List<decimal?>> TotalSalesMonth()
+        public async Task<decimal?> TotalSalesMonth()
         {
-            List<decimal?> totalSum = new List<decimal?>();
+            //List<decimal?> totalSum = new List<decimal?>();
             
             var orders = await _context.Orders.Where(o => o.OrderCreated > DateTime.Now.AddMonths(-1)).ToListAsync();
 
@@ -109,11 +109,9 @@ namespace Webstore_Admin.Models.Repositories
                     sum += orderDetail.Price;
                 }
                 
-            }
+            }           
 
-            totalSum.Add(sum);
-
-            return totalSum;
+            return sum;
         }
     }
 }

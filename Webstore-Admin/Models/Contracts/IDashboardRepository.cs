@@ -13,7 +13,7 @@ namespace Webstore_Admin.Models.Contracts
 
         Task<List<KeyValuePair<string, int?>>> MostSoldProducts();
 
-        Task<List<decimal?>> TotalSalesMonth();
+        Task<decimal?> TotalSalesMonth();
 
     }
 }
