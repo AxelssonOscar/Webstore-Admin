@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Threading.Tasks;
 using Webstore_Admin.Models;
 using Webstore_Admin.Models.Contracts;
@@ -10,9 +11,11 @@ namespace Webstore_Admin.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
-        public ProductController(IProductRepository productRepository)
+        private readonly ICategoryRepository _categoryRepository;
+        public ProductController(IProductRepository productRepository, ICategoryRepository categoryRepository)
         {
             _productRepository = productRepository;
+            _categoryRepository = categoryRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -20,9 +23,9 @@ namespace Webstore_Admin.Controllers
             return View(await _productRepository.GetAllAsync());
         }
 
-
         public IActionResult Create()
         {
+            ViewBag.Categories = new SelectList(_categoryRepository.GetCategories, "Id", "Name");
             return View();
         }
 
@@ -35,9 +38,9 @@ namespace Webstore_Admin.Controllers
                 await _productRepository.AddAsync(product);
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Categories = new SelectList(_categoryRepository.GetCategories, "Id", "Name");
             return View(product);
         }
-
 
         public async Task<IActionResult> Edit(int id)
         {
@@ -46,7 +49,6 @@ namespace Webstore_Admin.Controllers
             {
                 return View("NotFound");
             }
-
             return View(result);
         }
 
@@ -73,6 +75,5 @@ namespace Webstore_Admin.Controllers
             }
             return RedirectToAction("Index");
         }
-
     }
 }
