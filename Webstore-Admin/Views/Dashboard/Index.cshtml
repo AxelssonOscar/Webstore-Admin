@@ -93,22 +93,24 @@
     <div class="row">
         <div class="card bg-warning m-2 w-25 col-sm">
             <div class="card-body p-3">
-                <h4 class="card-title" style="text-align: center">Enter new data</h4>
+                <h4 class="card-title" style="text-align: center">Total sales last month</h4>
                 <table class="w-100">
                     <thead>
                         <tr>
-                            <th class="w-50">Product</th>
-                            <th class="w-50" style="text-align:center">In stock</th>
+                            <th style="text-align:center">Sum</th>
+                            @*<th class="w-50" style="text-align:center">In stock</th>*@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (Product product in Model.LowStockProducts)
+                        @foreach (decimal item in Model.TotalSalesMonth)
                         {
                             <tr>
-                                <td> @product.Name</td>
-                                <td style="text-align:center"> @product.UnitsInStock</td>
+                                <td style="text-align:center"> @item kr</td>
+                                @*<td style="text-align:center"> <a asp-controller="Customer" asp-action="Index" asp-route-customerId="@data.Key.Id">@data.Key.Name</a></td>*@
+                                <td style="text-align:center">  @*@data.Value*@</td>
                             </tr>
                         }
+
                     </tbody>
                 </table>
             </div>

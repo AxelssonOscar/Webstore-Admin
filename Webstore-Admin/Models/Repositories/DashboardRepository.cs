@@ -91,7 +91,29 @@ namespace Webstore_Admin.Models.Repositories
             var top5SoldProducts = sortedProducts.Select(p => p).Take(5).ToList();
 
             return top5SoldProducts;
-        }        
+        }
 
+        public async Task<List<decimal?>> TotalSalesMonth()
+        {
+            List<decimal?> totalSum = new List<decimal?>();
+            
+            var orders = await _context.Orders.Where(o => o.OrderCreated > DateTime.Now.AddMonths(-1)).ToListAsync();
+
+            decimal? sum = 0;
+
+            foreach (Order order in orders)
+            {
+                
+                foreach (OrderDetail orderDetail in order.OrderDetails)
+                {
+                    sum += orderDetail.Price;
+                }
+                
+            }
+
+            totalSum.Add(sum);
+
+            return totalSum;
+        }
     }
 }

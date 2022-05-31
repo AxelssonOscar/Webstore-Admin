@@ -11,7 +11,9 @@ namespace Webstore_Admin.Models.Contracts
         Task<IEnumerable<Product>> LowStockAsync();
         Task<List<KeyValuePair<Customer, decimal?>>> TopCustomer();
 
-        Task<List<KeyValuePair<string, int?>>> MostSoldProducts();        
+        Task<List<KeyValuePair<string, int?>>> MostSoldProducts();
+
+        Task<List<decimal?>> TotalSalesMonth();
 
     }
 }

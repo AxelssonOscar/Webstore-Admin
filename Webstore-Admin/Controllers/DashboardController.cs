@@ -27,6 +27,7 @@ namespace Webstore_Admin.Controllers
             viewModel.TopCustomer = await _dashboardRepository.TopCustomer();
             viewModel.LowStockProducts = await _dashboardRepository.LowStockAsync();
             viewModel.MostSoldProducts = await _dashboardRepository.MostSoldProducts();
+            viewModel.TotalSalesMonth = await _dashboardRepository.TotalSalesMonth();
             return View(viewModel);
         }
 
