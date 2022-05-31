@@ -15,13 +15,11 @@ namespace Webstore_Admin.Data.SeedData
         public List<Order> orderList = new List<Order>();
         private List<Product> productList = new List<Product>();
         private List<Customer> customerList = new List<Customer>();
+        private List<Discount> discountList = new List<Discount>();
 
         private List<string> weatherTypes = new List<string>();
 
         private List<Day> Calendar = new List<Day>();
-        private List<Tuple<Day, int>> ListOfHolidays = new List<Tuple<Day, int>>();
-
-        private List<Tuple<Product, string>> HolidayProducts = new List<Tuple<Product, string>>();
 
         //private List<string> holidays = new List<string>();
 
@@ -33,11 +31,12 @@ namespace Webstore_Admin.Data.SeedData
             }
             public DateTime CurrentDay { get; set; }
 
-            public string HolidayName { get; set; }
-
             public int Weight { get; set; }
 
             public string WeatherType { get; set; }
+
+            public List<Discount> discounts { get; set; }
+
 
         }
 
@@ -59,20 +58,7 @@ namespace Webstore_Admin.Data.SeedData
 
             productList = context.Products.ToList();
             customerList = context.Customers.ToList();
-
-
-            //Skapa en lista på produkter som säljer bättre under högtider.
-            HolidayProducts.Add(Tuple.Create(productList[0], "Påsk"));
-            HolidayProducts.Add(Tuple.Create(productList[1], "Påsk"));
-            HolidayProducts.Add(Tuple.Create(productList[2], "Påsk"));
-
-            HolidayProducts.Add(Tuple.Create(productList[3], "Midsommar"));
-            HolidayProducts.Add(Tuple.Create(productList[4], "Midsommar"));
-            HolidayProducts.Add(Tuple.Create(productList[5], "Midsommar"));
-
-            HolidayProducts.Add(Tuple.Create(productList[13], "Jul"));
-            HolidayProducts.Add(Tuple.Create(productList[14], "Jul"));
-            HolidayProducts.Add(Tuple.Create(productList[15], "Jul"));
+            discountList = context.Discounts.ToList();
 
 
             bool done = false;
@@ -97,28 +83,6 @@ namespace Webstore_Admin.Data.SeedData
         //Fyller kalendern med data.
         public void PopulateCalendar()
         {
-            //Sätter helgdagarna på rätt datum.
-            for(int i = 0; i < Calendar.Count; i++)
-            {
-                //Månad 12, dag 24 är jul.
-                if (Calendar[i].CurrentDay.Month == 12 && Calendar[i].CurrentDay.Day == 24)
-                {
-                    Calendar[i].HolidayName = "Jul";
-                    ListOfHolidays.Add(Tuple.Create(Calendar[i], i));
-                }
-                //Månad 6, dag 25 är midsommar.
-                else if (Calendar[i].CurrentDay.Month == 6 && Calendar[i].CurrentDay.Day == 25)
-                {
-                    Calendar[i].HolidayName = "Midsommar";
-                    ListOfHolidays.Add(Tuple.Create(Calendar[i], i));
-                }
-                //Månad 4, dag 17 är påsk.
-                else if (Calendar[i].CurrentDay.Month == 4 && Calendar[i].CurrentDay.Day == 17)
-                {
-                    Calendar[i].HolidayName = "Påsk";
-                    ListOfHolidays.Add(Tuple.Create(Calendar[i], i));
-                }
-            }
 
             for(int i = 0; i < Calendar.Count; i++)
             {
@@ -135,23 +99,38 @@ namespace Webstore_Admin.Data.SeedData
                 //Slumpa resterande dagar med 1/10 chans för cloudy.
                 else
                     Calendar[i].WeatherType = rnd.Next(10) == 1 ? "Cloudy" : "Weather";
-
             }
 
-            for(int i = 0; i < ListOfHolidays.Count; i++)
+            foreach(Discount discount in discountList)
             {
-                //Sätter weighted values för dagarna innan högtiden.
-                for(int j = 10; j > 0; j--)
+                List<DateTime> listOfDiscountDates = new List<DateTime>();
+                DateTime start = discount.StartDate;
+
+                while(start.Date <= discount.EndDate.Date)
                 {
-                    Calendar[ListOfHolidays[i].Item2 - j].HolidayName = ListOfHolidays[i].Item1.HolidayName;
-                    Calendar[ListOfHolidays[i].Item2 - j].Weight = -(j - 10) * 10;
+                    DateTime newDate = new DateTime();
+                    newDate = start;
+                    listOfDiscountDates.Add(newDate);
+                    start = start.AddDays(1);
                 }
-                //Sätter weighted values för dagarna efter högtiden.
-                for(int j = 1; j < 3; j++)
+
+                var discountLength = discount.EndDate.Date - discount.StartDate.Date;
+
+
+
+                for (int i = 0; i < Calendar.Count; i++)
                 {
-                    Calendar[ListOfHolidays[i].Item2 - j].HolidayName = ListOfHolidays[i].Item1.HolidayName;
-                    Calendar[ListOfHolidays[i].Item2 - j].Weight = 100 - j * 33;
+                    if (Calendar[i].CurrentDay.Date == discount.StartDate.Date)
+                    {
+                        for(int j = 0; j < discountLength.TotalDays; j++)
+                        {
+                            if(Calendar[i + j].discounts == null)
+                                Calendar[i + j].discounts = new List<Discount>();
+                            Calendar[i + j].discounts.Add(discount);
+                        }
+                    }
                 }
+
             }
         }
 
@@ -169,7 +148,7 @@ namespace Webstore_Admin.Data.SeedData
                 //Skapar en lista av samtliga produkter och deras vägning beroende på vad det är för sorts dag.
                 List<WeightedProducts> weightedProducts = new List<WeightedProducts>();
                 int sum = 0;
-                bool isHoliday = false;
+
                 for(int i = 0; i < productList.Count; i++)
                 {
                     WeightedProducts newWeightedProduct = new WeightedProducts();
@@ -179,60 +158,42 @@ namespace Webstore_Admin.Data.SeedData
                     weightedProducts.Add(newWeightedProduct);
                     sum += 10;
                 }
-                //Är det en högtidsdag så ska produkterna ha olika vägningar. 
-                if(day.HolidayName != null)
+
+                if(day.discounts != null)
                 {
-                    isHoliday = true;
-                    for (int i = 0; i < HolidayProducts.Count; i++)
+                    foreach(Discount discount in day.discounts)
                     {
-                        if(day.HolidayName == HolidayProducts[i].Item2)
+                        for(int i = 0; i < weightedProducts.Count; i++)
                         {
-                            weightedProducts[i].Product = HolidayProducts[i].Item1;
-                            weightedProducts[i].Weight = day.Weight;
-                            sum += day.Weight - 10;
+                            if(weightedProducts[i].Product == discount.Product)
+                            {
+                                weightedProducts[i].Weight = (int)(discount.Percent * 10);
+                                sum += weightedProducts[i].Weight - 10;
+                            }
                         }
                     }
                 }
-
-                if(isHoliday)
+                
+                for (int i = 0; i < rnd.Next(15) + 1; i++)
                 {
-                    //Skapar 10-25 ordrar vid högtid.
-                    for (int i = 0; i < rnd.Next(25) + 10; i++)
+                    Order newOrder = new Order();
+                    newOrder.Customer = customerList[rnd.Next(customerList.Count)];
+                    newOrder.CustomerId = newOrder.Customer.Id;
+
+                    newOrder.OrderCreated = day.CurrentDay;
+
+                    //Skapa produkterna i ordern.
+                    newOrder.OrderDetails = CreateItemsInOrders(weightedProducts, sum);
+                    newOrder.WeatherType = day.WeatherType;
+                    newOrder.Temperature = 0;
+                    newOrder.WindSpeed = 0;
+                    orderList.Add(newOrder);
+
+                    foreach(WeightedProducts product in weightedProducts)
                     {
-                        Order newOrder = new Order();
-                        newOrder.Customer = customerList[rnd.Next(customerList.Count)];
-                        newOrder.CustomerId = newOrder.Customer.Id;
-
-                        newOrder.OrderCreated = day.CurrentDay;
-
-                        //Skapa produkterna i ordern.
-                        newOrder.OrderDetails = CreateItemsInOrders(weightedProducts, sum);
-                        newOrder.WeatherType = day.WeatherType;
-                        newOrder.Temperature = 0;
-                        newOrder.WindSpeed = 0;
-
-                        orderList.Add(newOrder);
+                        product.ProductPicked = false;
                     }
-                }
-                else
-                {
-                    //Skapa 1-15 ordrar per dag då det inte är högtid.
-                    for (int i = 0; i < rnd.Next(15) + 1; i++)
-                    {
-                        Order newOrder = new Order();
-                        newOrder.Customer = customerList[rnd.Next(customerList.Count)];
-                        newOrder.CustomerId = newOrder.Customer.Id;
 
-                        newOrder.OrderCreated = day.CurrentDay;
-
-                        //Skapa produkterna i ordern.
-                        newOrder.OrderDetails = CreateItemsInOrders(weightedProducts, sum);
-                        newOrder.WeatherType = day.WeatherType;
-                        newOrder.Temperature = 0;
-                        newOrder.WindSpeed = 0;
-
-                        orderList.Add(newOrder);
-                    }
                 }
                 
             }
@@ -263,16 +224,24 @@ namespace Webstore_Admin.Data.SeedData
         {
             double r = rnd.Next(weightedSum);
             double sum = 0;
+            bool itemFound = false;
 
-            foreach (WeightedProducts product in weightedProducts)
+            
+            while(!itemFound)
             {
-                sum += product.Weight;
-                if (sum >= r)
+                foreach (WeightedProducts product in weightedProducts)
                 {
-                    product.ProductPicked = true;
-                    return product.Product;
+                    sum += product.Weight;
+                    if (sum >= r && !product.ProductPicked)
+                    {
+                        product.ProductPicked = true;
+                        return product.Product;
+                    }
                 }
+                r = rnd.Next(weightedSum);
+                sum = 0;
             }
+            
             return null;
         }
 

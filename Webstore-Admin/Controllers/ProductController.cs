@@ -34,6 +34,8 @@ namespace Webstore_Admin.Controllers
                 await _productRepository.AddAsync(product);
                 return RedirectToAction("Index");
             }
+
+
             return View(product);
         }
 

@@ -29,10 +29,7 @@ namespace Webstore_Admin.Data.SeedData
             CustomerCreator customerList = new CustomerCreator();
             customerList.LoadData();
 
-            foreach (Customer customer in customerList.customerList)
-            {
-                context.Customers.Add(customer);
-            }
+            context.Customers.AddRange(customerList.customerList);
 
             context.SaveChanges();
             return;
@@ -40,19 +37,16 @@ namespace Webstore_Admin.Data.SeedData
 
         private static void SeedOrders(AppDbContext context)
         {
-            if (context.Orders.Any())
-                return;
+            //if (context.Orders.Any())
+                //return;
 
             OrderCreator orderList = new OrderCreator();
             orderList.Init(context);
             orderList.CreateOrders(context);
 
-            //Skapa ordrar
-            foreach (Order order in orderList.orderList)
-            {
-                context.Orders.Add(order);
-            }
-            context.SaveChanges();
+            //context.Orders.AddRange(orderList.orderList);
+
+            //context.SaveChanges();
         }
 
     }

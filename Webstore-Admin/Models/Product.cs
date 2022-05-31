@@ -21,7 +21,7 @@ namespace Webstore_Admin.Models
 
         [Required(ErrorMessage = "Please enter units in stock...")]
         [Display(Name = "In Stock")]
-        public int UnitsInStock { get; set; }
+        public int? UnitsInStock { get; set; }
 
         [Required]
         [Display(Name = "Category")]

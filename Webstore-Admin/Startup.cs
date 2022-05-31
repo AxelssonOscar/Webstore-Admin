@@ -39,6 +39,7 @@ namespace Webstore_Admin
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IApiRepository, ApiRepository>();
+            services.AddScoped<IDiscountRepository, DiscountRepository>();
 
             services.AddHttpContextAccessor();
             services.AddSession();

@@ -24,7 +24,7 @@
                         @foreach (Product product in Model.LowStockProducts)
                         {
                             <tr>
-                                <td> @product.Name</td>
+                                <td><a asp-controller="Product" asp-action="Edit" asp-route-Id="@product.Id">@product.Name</a> </td>
                                 <td style="text-align:center"> @product.UnitsInStock</td>
                             </tr>
                         }
