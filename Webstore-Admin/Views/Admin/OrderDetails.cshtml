@@ -1,56 +1,57 @@
-﻿@model Order
+﻿@model OrderDetailsViewModel
 
 @{
     ViewData["Title"] = "Order Details -";
 }
 
 <div class="container p-1">
-    <div class="col-md-8 offset-md-2 p-1">
-        <div class="p-4">
-            <h1 class="display-4 text-center">Order #@Model.Id</h1>
-        </div>
+    <div class="p-4">
+        <h1 class="display-4 text-center">Order #@Model.Order.Id</h1>
+    </div>
 
-        <div class="col-md-8 offset-md-2 p-3">
-            <div>
-                <p class="p-2">
-                    @Model.Customer.Name <br />
-                    @Model.Customer.Address, @Model.Customer.City <br />
-                    @Model.Customer.Email <br />
-                    @Model.Customer.PhoneNumber
-                </p>
-            </div>
+    <div class="col-md-8 offset-md-2 p-3">
+        <div>
+            <p class="p-2">
+                @Model.Order.Customer.Name <br />
+                @Model.Order.Customer.Address, @Model.Order.Customer.City <br />
+                @Model.Order.Customer.Email <br />
+                @Model.Order.Customer.PhoneNumber <br />
+                Distance: @Model.Distance
+            </p>
         </div>
+    </div>
 
-        <div class="col-md-8 offset-md-2 p-3">
-            <table class="table">
-                <thead>
+    <div class="col-md-8 offset-md-2 p-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><p class="lead">Product</p></th>
+                    <th><p class="lead text-center">Amount</p></th>
+                    <th><p class="lead text-center">Unit Price</p></th>
+                    <th><p class="lead text-center">Total</p></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{decimal? sum = 0m; }
+                @foreach (var product in Model.Order.OrderDetails)
+                {
+                    sum += (product.Product.Price * product.Amount);
+
                     <tr>
-                        <th><p class="lead">Product</p></th>
-                        <th><p class="lead">Amount</p></th>
-                        <th><p class="lead">Unit Price</p></th>
-                        <th><p class="lead">Total</p></th>
+                        <td>@product.Product.Name</td>
+                        <td class="text-center"> x @product.Amount</td>
+                        <td class="text-center">@product.Product.Price kr</td>
+                        <td class="text-center">@(product.Product.Price * product.Amount) kr</td>       
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var product in Model.OrderDetails)
-                    {
-                        <tr>
-                            <td>@product.Product.Name</td>
-                            <td> x @product.Amount</td>
-                            <td>@product.Product.Price kr</td>
-                            @*---IF NOT USED, REMOVE THIS DECLARATION AND LEAVE CALC---*@
-                            <td>@{var total = (product.Product.Price * product.Amount); } @total kr</td>
-                        </tr>
-                    }
-                    <tr>
-                        <td>TOTAL: </td>
-                        <td></td>
-                        <td></td>
-                        <td>SUMMA </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+                }
+                <tr>
+                    <td>TOTAL:</td>
+                    <td></td>
+                    <td></td>
+                    <td class="text-center">@sum kr</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
     <div class="container p-3">

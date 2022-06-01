@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Webstore_Admin.Models;
 using Webstore_Admin.Models.Contracts;
 using Webstore_Admin.Models.Helpers;
+using Webstore_Admin.ViewModel;
 
 namespace Webstore_Admin.Controllers
 {
@@ -24,21 +25,27 @@ namespace Webstore_Admin.Controllers
                 return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll, pageNumber, pageSize, ""));
             }
             else
+
             {
                 return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll.Where(x => x.CustomerId == customerId), pageNumber, pageSize, ""));
             }
-        }
+
+
+
         public IActionResult OrderDetails(int id)
         {
-            var order = _orderRepository.GetOrders.FirstOrDefault(o => o.Id == id);
+            var vm = new OrderDetailsViewModel();
+            vm.Order = _orderRepository.GetOrders.FirstOrDefault(o => o.Id == id);
+            vm.Distance = _orderRepository.GetDistance(vm.Order.Customer.City);
 
-            if (order == null)
+
+            if (vm == null)
             {
                 return View("NotFound");
             }
             else
             {
-                return View(order);
+                return View(vm);
             }
         }
     }

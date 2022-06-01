@@ -7,5 +7,7 @@ namespace Webstore_Admin.Models.Contracts
     {
         IEnumerable<Order> GetOrders { get; }
         IQueryable<Order> GetAll { get; }
+        public string GetDistance(string city);
+
     }
 }
