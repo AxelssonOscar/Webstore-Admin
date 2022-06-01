@@ -11,12 +11,13 @@
 <form asp-controller="Customer" asp-action="Index">
     <div class="flex-container">
         <div class="row">
-            <div class="column align-content-lg-start col-5">
+
+            <div class="column align-content-lg-start col-3">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="column align-content-center col-2">
+            <div class="column align-content-center col-3">
                 <label asp-for="City" class="control-label"></label>
                 <input asp-for="City" class="form-control" />
                 <span asp-validation-for="City" class="text-danger"></span>
@@ -27,16 +28,10 @@
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-
-        </div>
-    </div>
-    <div class="flex-container">
-        <div class="col-2">
-            <a class="btn btn-primary" asp-action="Index">Back</a>
-        </div>
-        <div class="form-group">
             <input type="submit" value="Search" class="btn btn-primary" />
-        </div>
+            &nbsp;
+            <a class="btn btn-primary" asp-action="Index">Clear</a>
+        </div>  
     </div>
 </form>
 
@@ -94,7 +89,7 @@
                     <td>@customer.City</td>
                     <td>@customer.Address</td>
                     <td>
-                        <a asp-controller="Customer" asp-action="Details" asp-route-customerId="@customer.Id">Detailed view</a>
+                        <a class="btn btn-primary" asp-controller="Customer" asp-action="Details" asp-route-customerId="@customer.Id">Detailed view</a>
                     </td>
                 </tr>
             }
