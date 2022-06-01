@@ -29,6 +29,7 @@ namespace Webstore_Admin.Controllers
             {
                 return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll.Where(x => x.CustomerId == customerId), pageNumber, pageSize, ""));
             }
+        }
 
 
 
