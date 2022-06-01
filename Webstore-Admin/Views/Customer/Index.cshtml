@@ -11,7 +11,6 @@
 <form asp-controller="Customer" asp-action="Index">
     <div class="flex-container">
         <div class="row">
-
             <div class="column align-content-lg-start col-3">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
@@ -28,9 +27,11 @@
                 <input asp-for="Address" class="form-control" />
                 <span asp-validation-for="Address" class="text-danger"></span>
             </div>
-            <input type="submit" value="Search" class="btn btn-primary" />
-            &nbsp;
-            <a class="btn btn-primary" asp-action="Index">Clear</a>
+            <div id="mywrap">
+                <input type="submit" value="Search" class="btn btn-primary " />
+                &nbsp;
+                <a class="btn btn-primary" asp-action="Index" >Clear</a>
+            </div>
         </div>  
     </div>
 </form>
@@ -89,7 +90,7 @@
                     <td>@customer.City</td>
                     <td>@customer.Address</td>
                     <td>
-                        <a class="btn btn-primary" asp-controller="Customer" asp-action="Details" asp-route-customerId="@customer.Id">Detailed view</a>
+                        <a class="btn btn-outline-primary" asp-controller="Customer" asp-action="Details" asp-route-customerId="@customer.Id">Details</a>
                     </td>
                 </tr>
             }
