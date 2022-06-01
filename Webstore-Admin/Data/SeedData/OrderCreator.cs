@@ -165,11 +165,11 @@ namespace Webstore_Admin.Data.SeedData
                     {
                         for(int i = 0; i < weightedProducts.Count; i++)
                         {
-                            if(weightedProducts[i].Product == discount.Product)
-                            {
-                                weightedProducts[i].Weight = (int)(discount.Percent * 10);
-                                sum += weightedProducts[i].Weight - 10;
-                            }
+                            //if(weightedProducts[i].Product == discount.Product)
+                            //{
+                            //    weightedProducts[i].Weight = (int)(discount.Percent * 10);
+                            //    sum += weightedProducts[i].Weight - 10;
+                            //}
                         }
                     }
                 }

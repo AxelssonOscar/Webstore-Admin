@@ -11,6 +11,12 @@
     <Compile Remove="Migrations\20220524085128_Logg.Designer.cs" />
     <Compile Remove="Migrations\20220531082442_test.cs" />
     <Compile Remove="Migrations\20220531082442_test.Designer.cs" />
+    <Compile Remove="Migrations\20220601091818_productdiscounts.cs" />
+    <Compile Remove="Migrations\20220601091818_productdiscounts.Designer.cs" />
+    <Compile Remove="Migrations\20220601092104_productdiscounts.cs" />
+    <Compile Remove="Migrations\20220601092104_productdiscounts.Designer.cs" />
+    <Compile Remove="Migrations\20220601092602_productdiscounts.cs" />
+    <Compile Remove="Migrations\20220601092602_productdiscounts.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

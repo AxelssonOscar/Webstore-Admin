@@ -10,8 +10,9 @@ namespace Webstore_Admin.Models.Contracts
         public IQueryable<Discount> GetAll { get; }
 
         Task<Discount> GetSingleAsync(int id);
-        Task<Discount> AddAsync(Discount discount);
+        Task<Discount> AddAsync(Discount discount, IEnumerable<int> selectedIds);
         Task<Discount> UpdateAsync(Discount discount);
-        IQueryable<Discount> GetSpecific(string discountName);
+
+        Task<Tuple<Discount, List<Product>>> GetSpecific(int discountId);
     }
 }

@@ -11,6 +11,8 @@ namespace Webstore_Admin.Models.Contracts
 
         Task<IEnumerable<Product>> GetAllAsync();
 
+        IEnumerable<Product> GetAll { get; }
+
         Task<Product> GetSingleAsync(int id);
 
 

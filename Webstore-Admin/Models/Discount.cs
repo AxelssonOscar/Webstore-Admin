@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -10,7 +11,7 @@ namespace Webstore_Admin.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Discount name")]
+        [Display(Name = "Kampanj Namn")]
         public string Name { get; set; }
 
         [Required]
@@ -19,18 +20,13 @@ namespace Webstore_Admin.Models
         public decimal Percent { get; set; }
 
         [Required]
-        [Display(Name = "Start date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Start Datum")]
         public DateTime StartDate { get; set; }
 
         [Required]
-        [Display(Name = "End date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [Display(Name = "Slut Datum")]
         public DateTime EndDate { get; set; }
 
-        [Required]
-        [Display(Name = "Product")]
-        public int ProductId { get; set; }
-        public Product Product { get; set; }
+        public ICollection<DiscountProduct> DiscountProducts { get; set; }
     }
 }

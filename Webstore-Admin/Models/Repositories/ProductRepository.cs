@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Webstore_Admin.Data.Contexts;
 using Webstore_Admin.Models.Contracts;
@@ -48,7 +49,10 @@ namespace Webstore_Admin.Models.Repositories
         }
 
         public async Task<IEnumerable<Product>> GetAllAsync() =>
-            await _context.Products.Include(x =>x.Category).ToListAsync();
+            await _context.Products.Include(x => x.Category).ToListAsync();
+
+        public IEnumerable<Product> GetAll =>
+            _context.Products;
 
 
         public async Task<Product> GetSingleAsync(int id) =>
