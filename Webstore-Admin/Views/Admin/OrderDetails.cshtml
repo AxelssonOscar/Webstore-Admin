@@ -5,55 +5,57 @@
 }
 
 <div class="container p-1">
-    <div class="p-4">
-        <h1 class="display-4 text-center">Order #@Model.Id</h1>
-    </div>
+    <div class="col-md-8 offset-md-2 p-1">
+        <div class="p-4">
+            <h1 class="display-4 text-center">Order #@Model.Id</h1>
+        </div>
 
-    <div class="col-md-8 offset-md-2 p-3">
-        <div>
-            <p class="p-2">
-                @Model.Customer.Name <br />
-                @Model.Customer.Address, @Model.Customer.City <br />
-                @Model.Customer.Email <br />
-                @Model.Customer.PhoneNumber
-            </p>
+        <div class="col-md-8 offset-md-2 p-3">
+            <div>
+                <p class="p-2">
+                    @Model.Customer.Name <br />
+                    @Model.Customer.Address, @Model.Customer.City <br />
+                    @Model.Customer.Email <br />
+                    @Model.Customer.PhoneNumber
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-8 offset-md-2 p-3">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><p class="lead">Product</p></th>
+                        <th><p class="lead">Amount</p></th>
+                        <th><p class="lead">Unit Price</p></th>
+                        <th><p class="lead">Total</p></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var product in Model.OrderDetails)
+                    {
+                        <tr>
+                            <td>@product.Product.Name</td>
+                            <td> x @product.Amount</td>
+                            <td>@product.Product.Price kr</td>
+                            @*---IF NOT USED, REMOVE THIS DECLARATION AND LEAVE CALC---*@
+                            <td>@{var total = (product.Product.Price * product.Amount); } @total kr</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td>TOTAL: </td>
+                        <td></td>
+                        <td></td>
+                        <td>SUMMA </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <div class="col-md-8 offset-md-2 p-3">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th><p class="lead">Product</p></th>
-                    <th><p class="lead">Amount</p></th>
-                    <th><p class="lead">Unit Price</p></th>
-                    <th><p class="lead">Total</p></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var product in Model.OrderDetails)
-                {
-                    <tr>
-                        <td>@product.Product.Name</td>
-                        <td> x @product.Amount</td>
-                        <td>@product.Product.Price kr</td>
-                        @*---IF NOT USED, REMOVE THIS DECLARATION AND LEAVE CALC---*@
-                        <td>@{var total = (product.Product.Price * product.Amount); } @total kr</td>
-                    </tr>
-                }
-                <tr>
-                    <td>TOTAL: </td>
-                    <td></td>
-                    <td></td>
-                    <td>SUMMA </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-<div class="container p-3">
-    <div class="col-md-8 offset-md-2 p-3">
-        <a class="btn btn-outline-primary" asp-controller="Admin" asp-action="OrderList">Back</a>
+    <div class="container p-3">
+        <div class="col-md-8 offset-md-2 p-3">
+            <a class="btn btn-outline-primary" asp-controller="Admin" asp-action="OrderList">Back</a>
+        </div>
     </div>
 </div>
