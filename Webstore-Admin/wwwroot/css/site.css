@@ -16,9 +16,13 @@ a {
     display: flex;
     margin-bottom: 1%;
     justify-content: center;
+
 }
+
 .row {
     justify-content: center;
+    align-items: flex-end;
+
 }
 /*kod ovan är skapad av björnligan*/
 .btn-primary {
