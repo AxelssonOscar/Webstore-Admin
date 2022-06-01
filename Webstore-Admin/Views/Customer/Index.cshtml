@@ -5,128 +5,128 @@
     ViewData["Title"] = "Customer Search -";
 }
 
-<div class="p-4">
-    <h1 class="display-4 text-center">Customer Search</h1>
+<div class="container p-1">
+    <div class="col-md-8 offset-md-2 p-1">
+        <div class="p-4">
+            <h1 class="display-4 text-center">Customer Search</h1>
+        </div>
+        <form asp-controller="Customer" asp-action="Index">
+            <div class="flex-container">
+                <div class="row">
+                    <div class="column align-content-lg-start col-3">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="column align-content-center col-3">
+                        <label asp-for="City" class="control-label"></label>
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+
+                    </div>
+                    <div class="column align-content-end col-3">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div id="mywrap">
+                        <input type="submit" value="Search" class="btn btn-primary " />
+                        &nbsp;
+                        <a class="btn btn-primary" asp-action="Index">Clear</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        @if (Model.customers != null)
+        {
+            <h2>Results</h2>
+            <h3>@Model.customers.TotalCount matches</h3>
+
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder=""
+                               asp-route-pageOrder="@Model.customers.PageIndex"
+                               asp-route-name="@Model.Name"
+                               asp-route-city="@Model.City"
+                               asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Id)</a>
+                        </th>
+
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="name_asc"
+                               asp-route-pageOrder="@Model.customers.PageIndex"
+                               asp-route-name="@Model.Name"
+                               asp-route-city="@Model.City"
+                               asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Name)</a>
+                        </th>
+
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="city_asc"
+                               asp-route-pageOrder="@Model.customers.PageIndex"
+                               asp-route-name="@Model.Name"
+                               asp-route-city="@Model.City"
+                               asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.City)</a>
+                        </th>
+
+                        <th>
+                            <a asp-action="Index"
+                               asp-route-sortOrder="address_asc"
+                               asp-route-pageOrder="@Model.customers.PageIndex"
+                               asp-route-name="@Model.Name"
+                               asp-route-city="@Model.City"
+                               asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Address)</a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Customer customer in Model.customers)
+                    {
+                        <tr>
+                            <td>#@customer.Id</td>
+                            <td>@customer.Name</td>
+                            <td>@customer.City</td>
+                            <td>@customer.Address</td>
+                            <td>
+                                <a class="btn btn-outline-primary" asp-controller="Customer" asp-action="Details" asp-route-customerId="@customer.Id">Details</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            var prevDisabled = !Model.customers.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.customers.HasNextPage ? "disabled" : "";
+
+            <div class="container p-1">
+                <div class="col-md-8 offset-md-2 p-1">
+                    <div class="btn-group">
+                        <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.customers.PageIndex - 1)"
+                           asp-route-sortOrder="@Model.customers.SortOrder"
+                           asp-route-name="@Model.Name"
+                           asp-route-city="@Model.City"
+                           asp-route-address="@Model.Address"
+                           class="btn btn-outline-primary @prevDisabled">
+                            Previous
+                        </a>
+                        <a asp-action="Index"
+                           asp-route-pageNumber="@(Model.customers.PageIndex + 1)"
+                           asp-route-sortOrder="@Model.customers.SortOrder"
+                           asp-route-name="@Model.Name"
+                           asp-route-city="@Model.City"
+                           asp-route-address="@Model.Address"
+                           class="btn btn-outline-primary @nextDisabled">
+                            Next
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
 </div>
-<form asp-controller="Customer" asp-action="Index">
-    <div class="flex-container">
-        <div class="row">
-            <div class="column align-content-lg-start col-5">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="column align-content-center col-2">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-
-            </div>
-            <div class="column align-content-end col-3">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-
-        </div>
-    </div>
-    <div class="flex-container">
-        <div class="col-2">
-            <a class="btn btn-primary" asp-action="Index">Back</a>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Search" class="btn btn-primary" />
-        </div>
-    </div>
-</form>
-
-@if (Model.customers != null)
-{
-    <h2>Results</h2>
-    <h3>@Model.customers.TotalCount matches</h3>
-
-    <table class="table table-sm">
-        <thead>
-            <tr>
-                <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder=""
-                       asp-route-pageOrder="@Model.customers.PageIndex"
-                       asp-route-name="@Model.Name"
-                       asp-route-city="@Model.City"
-                       asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Id)</a>
-                </th>
-
-                <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="name_asc"
-                       asp-route-pageOrder="@Model.customers.PageIndex"
-                       asp-route-name="@Model.Name"
-                       asp-route-city="@Model.City"
-                       asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Name)</a>
-                </th>
-
-                <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="city_asc"
-                       asp-route-pageOrder="@Model.customers.PageIndex"
-                       asp-route-name="@Model.Name"
-                       asp-route-city="@Model.City"
-                       asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.City)</a>
-                </th>
-
-                <th>
-                    <a asp-action="Index"
-                       asp-route-sortOrder="address_asc"
-                       asp-route-pageOrder="@Model.customers.PageIndex"
-                       asp-route-name="@Model.Name"
-                       asp-route-city="@Model.City"
-                       asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Address)</a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (Customer customer in Model.customers)
-            {
-                <tr>
-                    <td>#@customer.Id</td>
-                    <td>@customer.Name</td>
-                    <td>@customer.City</td>
-                    <td>@customer.Address</td>
-                    <td>
-                        <a asp-controller="Customer" asp-action="Details" asp-route-customerId="@customer.Id">Detailed view</a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-
-    var prevDisabled = !Model.customers.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.customers.HasNextPage ? "disabled" : "";
-
-    <div class="container p-1">
-        <div class="col-md-8 offset-md-2 p-1">
-            <div class="btn-group">
-                <a asp-action="Index"
-                   asp-route-pageNumber="@(Model.customers.PageIndex - 1)"
-                   asp-route-sortOrder="@Model.customers.SortOrder"
-                   asp-route-name="@Model.Name"
-                   asp-route-city="@Model.City"
-                   asp-route-address="@Model.Address"
-                   class="btn btn-outline-primary @prevDisabled">
-                    Previous
-                </a>
-                <a asp-action="Index"
-                   asp-route-pageNumber="@(Model.customers.PageIndex + 1)"
-                   asp-route-sortOrder="@Model.customers.SortOrder"
-                   asp-route-name="@Model.Name"
-                   asp-route-city="@Model.City"
-                   asp-route-address="@Model.Address"
-                   class="btn btn-outline-primary @nextDisabled">
-                    Next
-                </a>
-            </div>
-        </div>
-    </div>
-
-}

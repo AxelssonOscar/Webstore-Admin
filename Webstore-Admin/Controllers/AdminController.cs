@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webstore_Admin.Models;
@@ -23,10 +21,15 @@ namespace Webstore_Admin.Controllers
         public async Task<IActionResult> OrderList(int? customerId, int pageNumber = 1, int pageSize = 10)
         {
             if (customerId == null)
+            {
                 return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll, pageNumber, pageSize, ""));
+            }
             else
+
+            {
                 return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll.Where(x => x.CustomerId == customerId), pageNumber, pageSize, ""));
-        }
+            }
+
 
 
         public IActionResult OrderDetails(int id)

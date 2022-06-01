@@ -101,16 +101,12 @@
                             @*<th class="w-50" style="text-align:center">In stock</th>*@
                         </tr>
                     </thead>
-                    <tbody>
-                        @foreach (decimal item in Model.TotalSalesMonth)
-                        {
-                            <tr>
-                                <td style="text-align:center"> @item kr</td>
+                    <tbody>                      
+                        <tr>
+                            <td style="text-align:center"> @Model.TotalSalesMonth.Value kr</td>
                                 @*<td style="text-align:center"> <a asp-controller="Customer" asp-action="Index" asp-route-customerId="@data.Key.Id">@data.Key.Name</a></td>*@
-                                <td style="text-align:center">  @*@data.Value*@</td>
-                            </tr>
-                        }
-
+                            <td style="text-align:center">  @*@data.Value*@</td>
+                        </tr>                   
                     </tbody>
                 </table>
             </div>

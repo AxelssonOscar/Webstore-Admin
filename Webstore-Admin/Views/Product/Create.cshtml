@@ -3,47 +3,53 @@
 @{
     ViewData["Title"] = "Add Product -";
 }
-
-<form method="post" asp-action="Create">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group row">
-            <h2 class="display-4 text-center pl-3">Add Product</h2>
+<div class="container p-1">
+    <div class="col-md-8 offset-md-2 p-1">
+        <div class="p-4">
+            <h1 class="display-4 text-center">Add Product</h1>
         </div>
+        <form method="post" asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <h2 class="display-4 text-center pl-3">Add Product</h2>
+            </div>
 
-        <div class="flex-container">
-            <div class="row">
-                <div class="column col-2">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
+            <div class="flex-container">
+                <div class="row">
+                    <div class="column col-2">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
 
-                <div class="column col-2">
-                    <label asp-for="Price" class="control-label"></label>
-                    <input asp-for="Price" class="form-control" />
-                    <span asp-validation-for="Price" class="text-danger"></span>
-                </div>
+                    <div class="column col-2">
+                        <label asp-for="Price" class="control-label"></label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
 
-                <div class="column col-2">
-                    <label asp-for="UnitsInStock" class="control-label"></label>
-                    <input asp-for="UnitsInStock" class="form-control" />
-                    <span asp-validation-for="UnitsInStock" class="text-danger"></span>
-                </div>
+                    <div class="column col-2">
+                        <label asp-for="UnitsInStock" class="control-label"></label>
+                        <input asp-for="UnitsInStock" class="form-control" />
+                        <span asp-validation-for="UnitsInStock" class="text-danger"></span>
+                    </div>
 
-                <div class="column col-2">
-                    <label asp-for="CategoryId" class="control-label"></label>
-                    <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
-                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    <div class="column col-2">
+                        <label asp-for="CategoryId" class="control-label"></label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="flex-container">
-            <div class="col-2 p-3 text-center">
-                <a asp-action="Index" class="btn btn-primary">Back</a>
+            <div class="flex-container">
+                <div class="col-2 p-3 text-center">
+                    <a asp-action="Index" class="btn btn-primary">Back</a>
+                </div>
+                <div class="col-2 p-3 text-center">
+                    <input type="submit" class="btn btn-primary" value="Create" />
+                </div>
             </div>
-            <div class="col-2 p-3 text-center">
-                <input type="submit" class="btn btn-primary" value="Create" />
-            </div>
-        </div>
-</form>
+        </form>
+    </div>
+</div>
