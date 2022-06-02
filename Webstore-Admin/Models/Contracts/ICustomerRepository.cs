@@ -8,6 +8,7 @@ namespace Webstore_Admin.Models.Contracts
     public interface ICustomerRepository
     {
         IQueryable<Customer> Search(string name, string city, string address);
+        IQueryable<Customer> BadSearch(string name, string city, string address);
         IQueryable<Customer> GetSingle(int? customerId);
         Task<Tuple<Customer, string>> GetSingleAndDistanceAsync(int id);
 

@@ -26,7 +26,7 @@ namespace Webstore_Admin.Controllers
 
             if (!string.IsNullOrEmpty(name) || !string.IsNullOrEmpty(city) || !string.IsNullOrEmpty(address))
             {
-                var result = _customerRepository.Search(name, city, address);
+                var result = _customerRepository.BadSearch(name, city, address);
                 viewModel.Address = address;
                 viewModel.City = city;
                 viewModel.Name = name;
