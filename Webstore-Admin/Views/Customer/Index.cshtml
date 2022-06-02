@@ -40,7 +40,7 @@
 
         @if (Model.customers != null)
         {
-            <h2>Results</h2>
+            <h2 class="py-4" >Results</h2>
             <h3>@Model.customers.TotalCount matches</h3>
 
             <table class="table table-sm">
@@ -81,6 +81,7 @@
                                asp-route-city="@Model.City"
                                asp-route-address="@Model.Address">@Html.DisplayNameFor(x => x.Address)</a>
                         </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
