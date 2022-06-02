@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Webstore_Admin.Data.SeedData
         public List<Order> orderList = new List<Order>();
         private List<Product> productList = new List<Product>();
         private List<Customer> customerList = new List<Customer>();
-        private List<Discount> discountList = new List<Discount>();
+        private List<DiscountProduct> discountList = new List<DiscountProduct>();
 
         private List<string> weatherTypes = new List<string>();
 
@@ -33,9 +34,7 @@ namespace Webstore_Admin.Data.SeedData
 
             public int Weight { get; set; }
 
-            public string WeatherType { get; set; }
-
-            public List<Discount> discounts { get; set; }
+            public List<DiscountProduct> DiscountProducts { get; set; }
 
 
         }
@@ -58,7 +57,7 @@ namespace Webstore_Admin.Data.SeedData
 
             productList = context.Products.ToList();
             customerList = context.Customers.ToList();
-            discountList = context.Discounts.ToList();
+            discountList = context.DiscountProducts.Include(d => d.Discount).OrderBy(d => d.Discount.StartDate).ToList();
 
 
             bool done = false;
@@ -67,7 +66,7 @@ namespace Webstore_Admin.Data.SeedData
             //Skapa dagarna och lägg in de i kalendern.
             while(!done)
             {
-                Day day = new Day(DateTime.Today.AddDays((-(365*2)) + DayCounter));
+                Day day = new Day(DateTime.Today.AddDays((-(365*3) - 10) + DayCounter));
 
                 DayCounter++;
                 Calendar.Add(day);
@@ -84,29 +83,12 @@ namespace Webstore_Admin.Data.SeedData
         public void PopulateCalendar()
         {
 
-            for(int i = 0; i < Calendar.Count; i++)
-            {
-                //Hela vintern är kall.
-                if (Calendar[i].CurrentDay.Month == 11 || Calendar[i].CurrentDay.Month == 12 || Calendar[i].CurrentDay.Month == 1)
-                {
-                    Calendar[i].WeatherType = "Snowy";
-                }
-                //Hela sommaren är varm.
-                else if (Calendar[i].CurrentDay.Month == 6 || Calendar[i].CurrentDay.Month == 7 || Calendar[i].CurrentDay.Month == 8)
-                {
-                    Calendar[i].WeatherType = "Sunny";
-                }
-                //Slumpa resterande dagar med 1/10 chans för cloudy.
-                else
-                    Calendar[i].WeatherType = rnd.Next(10) == 1 ? "Cloudy" : "Weather";
-            }
-
-            foreach(Discount discount in discountList)
+            foreach (DiscountProduct discountProduct in discountList)
             {
                 List<DateTime> listOfDiscountDates = new List<DateTime>();
-                DateTime start = discount.StartDate;
+                DateTime start = discountProduct.Discount.StartDate;
 
-                while(start.Date <= discount.EndDate.Date)
+                while (start.Date <= discountProduct.Discount.EndDate.Date)
                 {
                     DateTime newDate = new DateTime();
                     newDate = start;
@@ -114,19 +96,19 @@ namespace Webstore_Admin.Data.SeedData
                     start = start.AddDays(1);
                 }
 
-                var discountLength = discount.EndDate.Date - discount.StartDate.Date;
+                var discountLength = discountProduct.Discount.EndDate.Date - discountProduct.Discount.StartDate.Date;
 
 
 
                 for (int i = 0; i < Calendar.Count; i++)
                 {
-                    if (Calendar[i].CurrentDay.Date == discount.StartDate.Date)
+                    if (Calendar[i].CurrentDay.Date == discountProduct.Discount.StartDate.Date)
                     {
-                        for(int j = 0; j < discountLength.TotalDays; j++)
+                        for (int j = 0; j < discountLength.TotalDays; j++)
                         {
-                            if(Calendar[i + j].discounts == null)
-                                Calendar[i + j].discounts = new List<Discount>();
-                            Calendar[i + j].discounts.Add(discount);
+                            if (Calendar[i + j].DiscountProducts == null)
+                                Calendar[i + j].DiscountProducts = new List<DiscountProduct>();
+                            Calendar[i + j].DiscountProducts.Add(discountProduct);
                         }
                     }
                 }
@@ -140,8 +122,8 @@ namespace Webstore_Admin.Data.SeedData
             productList = context.Products.ToList();
             customerList = context.Customers.ToList();
 
-            //const int ORDERS_PER_DAY = 10;
-            
+            int counter = 0;
+
             //Loopa igenom hela kalendern en dag i taget.
             foreach(Day day in Calendar)
             {
@@ -159,22 +141,22 @@ namespace Webstore_Admin.Data.SeedData
                     sum += 10;
                 }
 
-                if(day.discounts != null)
+                if (day.DiscountProducts != null)
                 {
-                    foreach(Discount discount in day.discounts)
+                    foreach (DiscountProduct discountProduct in day.DiscountProducts)
                     {
-                        for(int i = 0; i < weightedProducts.Count; i++)
+                        for (int i = 0; i < weightedProducts.Count; i++)
                         {
-                            //if(weightedProducts[i].Product == discount.Product)
-                            //{
-                            //    weightedProducts[i].Weight = (int)(discount.Percent * 10);
-                            //    sum += weightedProducts[i].Weight - 10;
-                            //}
+                            if(weightedProducts[i].Product == discountProduct.Product)
+                            {
+                                weightedProducts[i].Weight = (int)discountProduct.Discount.Percent;
+                                sum += weightedProducts[i].Weight - 10;
+                            }
                         }
                     }
                 }
-                
-                for (int i = 0; i < rnd.Next(15) + 1; i++)
+
+                for (int i = 0; i < rnd.Next(1, 100); i++)
                 {
                     Order newOrder = new Order();
                     newOrder.Customer = customerList[rnd.Next(customerList.Count)];
@@ -183,10 +165,11 @@ namespace Webstore_Admin.Data.SeedData
                     newOrder.OrderCreated = day.CurrentDay;
 
                     //Skapa produkterna i ordern.
-                    newOrder.OrderDetails = CreateItemsInOrders(weightedProducts, sum);
-                    newOrder.WeatherType = day.WeatherType;
-                    newOrder.Temperature = 0;
-                    newOrder.WindSpeed = 0;
+                    newOrder.OrderDetails = CreateItemsInOrders(weightedProducts, sum, day);
+                    foreach(OrderDetail detail in newOrder.OrderDetails)
+                    {
+                        detail.Order = newOrder;
+                    }
                     orderList.Add(newOrder);
 
                     foreach(WeightedProducts product in weightedProducts)
@@ -195,13 +178,15 @@ namespace Webstore_Admin.Data.SeedData
                     }
 
                 }
+
+                counter++;
                 
             }
 
         }
 
         //Skapa produkterna till ordern.
-        public ICollection<OrderDetail> CreateItemsInOrders(List<WeightedProducts> weightedProducts, int sum)
+        public ICollection<OrderDetail> CreateItemsInOrders(List<WeightedProducts> weightedProducts, int sum, Day day)
         {
             Collection<OrderDetail> orderDetails = new Collection<OrderDetail>();
 
@@ -210,6 +195,21 @@ namespace Webstore_Admin.Data.SeedData
             {
                 OrderDetail orderDetail = new OrderDetail();
                 orderDetail.Product = GetItem(weightedProducts, sum);
+
+                if(day.DiscountProducts != null)
+                {
+                    foreach (DiscountProduct discountProduct in day.DiscountProducts)
+                    {
+                        if (discountProduct.Product == orderDetail.Product)
+                        {
+                            orderDetail.Product.DiscountProducts.Add(discountProduct);
+                            break;
+                        }
+                    }
+                }
+
+                
+
                 orderDetail.ProductId = orderDetail.Product.Id;
                 orderDetail.Amount = rnd.Next(5) + 1;
                 orderDetail.Price = orderDetail.Product.Price * orderDetail.Amount;

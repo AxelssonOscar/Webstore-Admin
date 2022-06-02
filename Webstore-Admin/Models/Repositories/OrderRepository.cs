@@ -18,5 +18,10 @@ namespace Webstore_Admin.Models.Repositories
 
         public IQueryable<Order> GetAll =>
             _context.Orders.Include(x => x.OrderDetails).ThenInclude(x => x.Product);
+
+        public Order GetSingle(int id)
+        {
+            return _context.Orders.Include(x => x.OrderDetails).ThenInclude(x => x.Product).FirstOrDefault(o => o.Id == id);
+        }
     }
 }

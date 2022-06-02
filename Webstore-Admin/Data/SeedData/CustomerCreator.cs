@@ -85,7 +85,7 @@ namespace Webstore_Admin.Data.SeedData
 
             //Skapa kunderna från datan som laddats in.
             //Slumpade namn, vägda men slumpade städer samt städernas gator.
-            for(int i = 0; i < 1000; i++)
+            for(int i = 0; i < 8996; i++)
             {
                 string name = firstnamesInput[rnd.Next(firstnamesInput.Length)] + " " + lastnamesInput[rnd.Next(lastnamesInput.Length)];
                 string email = string.Join("", name.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries)) + "@hotmail.com";

@@ -33,7 +33,6 @@ namespace Webstore_Admin.Controllers
 
         public async Task<IActionResult> Create(DiscountCreateViewModel viewModel, bool copy = false)
         {
-
             DiscountCreateViewModel _viewModel = new DiscountCreateViewModel();
 
             if (ModelState.IsValid && copy != false)

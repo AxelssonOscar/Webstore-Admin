@@ -30,6 +30,8 @@ namespace Webstore_Admin.Controllers
         {
             var order = _orderRepository.GetOrders.FirstOrDefault(o => o.Id == id);
 
+            //var order = _orderRepository.GetSingle(id);
+
             if (order == null)
             {
                 return View("NotFound");

@@ -37,16 +37,33 @@ namespace Webstore_Admin.Data.SeedData
 
         private static void SeedOrders(AppDbContext context)
         {
-            //if (context.Orders.Any())
-                //return;
+            if (context.Orders.Any())
+                return;
+
 
             OrderCreator orderList = new OrderCreator();
             orderList.Init(context);
             orderList.CreateOrders(context);
 
-            //context.Orders.AddRange(orderList.orderList);
+            for(int i = 0; i < orderList.orderList.Count; i++)
+            {
+                context.Orders.Add(orderList.orderList[i]);
+                if(i % 1000 == 0)
+                {
+                    context.SaveChanges();
+                }
+            }
 
-            //context.SaveChanges();
+            context.SaveChanges();
+            
+
+
+            //foreach (Order order in orderList.orderList)
+            //{
+            //    context.Orders.Add(order);
+            //    context.SaveChanges();
+            //}
+
         }
 
     }

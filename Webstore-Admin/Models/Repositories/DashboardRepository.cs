@@ -52,7 +52,7 @@ namespace Webstore_Admin.Models.Repositories
 
             var sortedCustomers = from entry in customers orderby entry.Value descending select entry;
 
-            var top5Customers = sortedCustomers.Select(c => c).Take(5).ToList();
+            var top5Customers = sortedCustomers.Select(c => c).Take(10).ToList();
 
             //Tuple<Customer, decimal> result = Tuple.Create(highestCustomer, highestSum);
 
