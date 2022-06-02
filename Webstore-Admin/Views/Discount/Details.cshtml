@@ -29,7 +29,7 @@
                         <td class="align-middle">@product.Name</td>
                         <td class="align-middle">@product.Price kr</td>
                         <td class="align-middle">@Model.Item1.Percent %</td>
-                        <td class="align-middle">@(product.Price * ((100 - Model.Item1.Percent) / 100)) kr</td>
+                        <td class="align-middle">@(Decimal.Round((product.Price.Value * ((100 - Model.Item1.Percent) / 100)), 2)) kr</td>
 
                     </tr>
                 }
