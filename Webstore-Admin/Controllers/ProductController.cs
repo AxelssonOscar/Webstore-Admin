@@ -49,6 +49,7 @@ namespace Webstore_Admin.Controllers
             {
                 return View("NotFound");
             }
+            ViewBag.Categories = new SelectList(_categoryRepository.GetCategories, "Id", "Name");
             return View(result);
         }
 
@@ -56,12 +57,12 @@ namespace Webstore_Admin.Controllers
         public async Task<IActionResult> Edit(int id, Product product)
         {
             var result = await _productRepository.GetSingleAsync(id);
-
             if (ModelState.IsValid)
             {
                 await _productRepository.UpdateAsync(product);
                 return RedirectToAction("Index");
             }
+            ViewBag.Categories = new SelectList(_categoryRepository.GetCategories, "Id", "Name");
             return View(result);            
         }
     }
