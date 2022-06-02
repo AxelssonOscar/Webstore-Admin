@@ -1,0 +1,61 @@
+﻿@model Webstore_Admin.ViewModel.DiscountCreateViewModel
+
+@{
+    ViewData["Title"] = "Add Discount";
+}
+
+
+
+
+<form method="post" asp-action="Create">
+    <div>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <h2 class="text-secondary font-weight-light pl-3">Add Product</h2>
+        </div>
+
+        <div class="flex-container">
+            <div class="row">
+                <div class="column col-2">
+                    <label asp-for="@Model.Discount.Name" class="control-label"></label>
+                    <input asp-for="@Model.Discount.Name" class="form-control" />
+                    <span asp-validation-for="@Model.Discount.Name" class="text-danger"></span>
+                </div>
+
+                <div class="column col-2">
+                    <label asp-for="@Model.Discount.Percent" class="control-label"></label>
+                    <input asp-for="@Model.Discount.Percent" class="form-control" />
+                    <span asp-validation-for="@Model.Discount.Percent" class="text-danger"></span>
+                </div>
+
+                <div class="column col-2">
+                    <label asp-for="@Model.Discount.StartDate" class="control-label" value="asd1"></label>
+                    <input asp-for="@Model.Discount.StartDate" class="form-control" value="asd2" />
+                    <span asp-validation-for="@Model.Discount.StartDate" class="text-danger" value="asd6"></span>
+                </div>
+
+                <div class="column col-2">
+                    <label asp-for="@Model.Discount.EndDate" class="control-label" value="asd3"></label>
+                    <input asp-for="@Model.Discount.EndDate" class="form-control" value="asd4" />
+                    <span asp-validation-for="@Model.Discount.EndDate" class="text-danger" value="asd5"></span>
+                </div>
+
+                <div class="column col-2">
+                    <label class="control-label"></label>
+                    <select asp-for="SelectedProductIds" class="form-control" asp-items="ViewBag.Products"></select>
+                    <span class="text-danger"></span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="flex-container">
+            <div class="col-2 p-3 text-center">
+                <a asp-action="Index" class="btn btn-primary">Back</a>
+            </div>
+            <div class="col-2 p-3 text-center">
+                <input type="submit" class="btn btn-primary" asp-route-copy="true" value="Create" />
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,39 @@
+﻿@model Tuple<Discount, List<Product>>
+
+@{
+    ViewData["Title"] = "Discount Details - ";
+}
+
+<div class="container p-1">
+    <div class="col-md-8 offset-md-2 p-1">
+        <div class="mx-auto p-4">
+            <h1 class="text-secondary font-weight-light" style="text-align: center">Products in @Model.Item1.Name</h1>
+        </div>
+    </div>
+
+    <div class="col-md-8 offset-md-2 p-1">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Original Price</th>
+                    <th>Discount</th>
+                    <th>New price</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (Product product in Model.Item2)
+                {
+                    <tr>
+                        <td class="align-middle">@product.Name</td>
+                        <td class="align-middle">@product.Price kr</td>
+                        <td class="align-middle">@Model.Item1.Percent %</td>
+                        <td class="align-middle">@(product.Price * ((100 - Model.Item1.Percent) / 100)) kr</td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

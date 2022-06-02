@@ -29,10 +29,7 @@ namespace Webstore_Admin.Data.SeedData
             CustomerCreator customerList = new CustomerCreator();
             customerList.LoadData();
 
-            foreach (Customer customer in customerList.customerList)
-            {
-                context.Customers.Add(customer);
-            }
+            context.Customers.AddRange(customerList.customerList);
 
             context.SaveChanges();
             return;
@@ -47,12 +44,18 @@ namespace Webstore_Admin.Data.SeedData
             orderList.Init(context);
             orderList.CreateOrders(context);
 
-            //Skapa ordrar
-            foreach (Order order in orderList.orderList)
+            for (int i = 0; i < orderList.orderList.Count; i++)
             {
-                context.Orders.Add(order);
+                context.Orders.Add(orderList.orderList[i]);
+                if (i % 1000 == 0)
+                {
+                    context.SaveChanges();
+                }
             }
+
             context.SaveChanges();
+
+
         }
 
     }

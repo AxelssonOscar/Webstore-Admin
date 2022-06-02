@@ -18,9 +18,6 @@ namespace Webstore_Admin.Models
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime OrderCreated { get; set; }
 
-        public string WeatherType { get; set; }
-        public double Temperature { get; set; }
-        public double WindSpeed { get; set; }
 
         public ICollection<OrderDetail> OrderDetails { get; set; }
     }

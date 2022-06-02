@@ -41,5 +41,8 @@ namespace Webstore_Admin.Models.Repositories
         public async Task<Product> GetSingleAsync(int id) =>
             await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
+        public IEnumerable<Product> GetAll =>
+            _context.Products;
+
     }
 }

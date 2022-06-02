@@ -36,7 +36,7 @@ namespace Webstore_Admin.Data.SeedData
             string[] streetsInput = File.ReadAllLines("./Data/SeedData/Streets.txt", Encoding.GetEncoding("iso-8859-1"));
 
             //Splittar strängen från stad-input så att staden och befolkningen hamnar i egna variabler.
-            for(int i = 0; i < citiesInput.Length; i++)
+            for (int i = 0; i < citiesInput.Length; i++)
             {
                 string[] cityInput = citiesInput[i].Split("\t");
                 string[] cityPopulation = cityInput[1].Split(" ");
@@ -54,10 +54,10 @@ namespace Webstore_Admin.Data.SeedData
             }
 
             //Splittar strängen från gat-input så att staden blir nyckeln i dictionaryn med tillhörande gator.
-            for(int i = 0; i < streetsInput.Length; i++)
+            for (int i = 0; i < streetsInput.Length; i++)
             {
                 string[] streetInput = streetsInput[i].Split("\t");
-                if(streets.ContainsKey(streetInput[0]))
+                if (streets.ContainsKey(streetInput[0]))
                 {
                     streets[streetInput[0]].Add(streetInput[1]);
                 }
@@ -71,13 +71,13 @@ namespace Webstore_Admin.Data.SeedData
 
             int totalPop = 0;
             //Summera populationen
-            foreach(City city in cities)
+            foreach (City city in cities)
             {
                 totalPop += city.Population;
             }
 
             //Beräkna vägningen för städernas storlek. Svar i %.
-            foreach(City city in cities)
+            foreach (City city in cities)
             {
                 city.Weight = (city.Population / (double)totalPop) * 100;
                 Debug.WriteLine(city.Name + " " + city.Weight);
@@ -85,7 +85,7 @@ namespace Webstore_Admin.Data.SeedData
 
             //Skapa kunderna från datan som laddats in.
             //Slumpade namn, vägda men slumpade städer samt städernas gator.
-            for(int i = 0; i < 1000; i++)
+            for (int i = 0; i < 8996; i++)
             {
                 string name = firstnamesInput[rnd.Next(firstnamesInput.Length)] + " " + lastnamesInput[rnd.Next(lastnamesInput.Length)];
                 string email = string.Join("", name.Split(default(string[]), StringSplitOptions.RemoveEmptyEntries)) + "@hotmail.com";
@@ -107,10 +107,10 @@ namespace Webstore_Admin.Data.SeedData
             double r = rnd.NextDouble() * 100;
             double sum = 0;
 
-            foreach(City city in cities)
+            foreach (City city in cities)
             {
                 sum += city.Weight;
-                if(sum >= r)
+                if (sum >= r)
                 {
                     return city;
                 }
@@ -121,14 +121,11 @@ namespace Webstore_Admin.Data.SeedData
 
         public void PrintData()
         {
-            foreach(Customer customer in customerList)
+            foreach (Customer customer in customerList)
             {
                 Debug.WriteLine(customer.Name + ", " + customer.Email + ", " + customer.City);
             }
         }
-
-
-
 
     }
 }
