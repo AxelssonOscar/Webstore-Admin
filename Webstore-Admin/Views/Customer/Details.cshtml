@@ -1,26 +1,36 @@
 ﻿@model CustomerDetailsViewModel
 
+<div class="container p-1">
+    <div class="col-md-8 offset-md-2 p-1">
+        <div class="p-4">            
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
 
-<div class="container">
-    <div class="row">
-        Name - @Model.customer.Name
-    </div>
-    <div class="row">
-        City - @Model.customer.City
-    </div>
-    <div class="row">
-        Address - @Model.customer.Address
-    </div>
-    <div class="row">
-        Email - @Model.customer.Email
-    </div>
-    <div class="row">
-        Phone number - @Model.customer.PhoneNumber
-    </div>
-    <div class="row">
-        Distance - @Model.distance
-    </div>
-    <div class="row">
-        <a asp-controller="Admin" asp-action="OrderList" asp-route-customerId="@Model.customer.Id">View orders</a>
+                    <th scope="col">Name</th>
+                    <th scope="col">Adress</th>
+                    <th scope="col">City</th>
+                    <th scope="col">Zipcode</th>
+                    <th scope="col">Phone</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@Model.customer.Name</td>
+                    <td>@Model.customer.Address</td>
+                    <td>@Model.customer.City</td>
+                    <td>@Model.customer.ZipCode</td>
+                    <td>@Model.customer.PhoneNumber</td>
+
+                </tr>
+            </tbody>
+        </table>
+        <a class="btn btn-outline-primary" asp-controller="Admin" asp-action="OrderList" asp-route-customerId="@Model.customer.Id">View orders</a>
     </div>
 </div>
+
+
+
+        
