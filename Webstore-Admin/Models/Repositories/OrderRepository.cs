@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using Webstore_Admin.Data.Contexts;
@@ -16,16 +15,16 @@ namespace Webstore_Admin.Models.Repositories
         {
             _context = context;
         }
-        public IEnumerable<Order> GetOrders =>
-            _context.Orders.Include(x => x.Customer).Include(x => x.OrderDetails).ThenInclude(x => x.Product);
 
         public IQueryable<Order> GetAll =>
             _context.Orders.Include(x => x.OrderDetails).ThenInclude(x => x.Product);
 
+        public Order GetSingle(int id) =>
+            _context.Orders.Include(x => x.Customer).Include(x => x.OrderDetails).ThenInclude(x => x.Product).FirstOrDefault(x => x.Id == id);
+
         public string GetDistance(string city)
         {
             const string warehouse = "Örnsköldsvik";
-
             string result;
 
             using (WebClient wc = new WebClient())
@@ -44,7 +43,6 @@ namespace Webstore_Admin.Models.Repositories
 
                 result = actualDistance;
             }
-
             return result;
         }
     }

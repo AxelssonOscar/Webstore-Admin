@@ -25,20 +25,16 @@ namespace Webstore_Admin.Controllers
                 return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll, pageNumber, pageSize, ""));
             }
             else
-
             {
                 return View(await PaginatedList<Order>.CreateAsync(_orderRepository.GetAll.Where(x => x.CustomerId == customerId), pageNumber, pageSize, ""));
             }
         }
 
-
-
         public IActionResult OrderDetails(int id)
         {
             var vm = new OrderDetailsViewModel();
-            vm.Order = _orderRepository.GetOrders.FirstOrDefault(o => o.Id == id);
+            vm.Order = _orderRepository.GetSingle(id);
             vm.Distance = _orderRepository.GetDistance(vm.Order.Customer.City);
-
 
             if (vm == null)
             {
