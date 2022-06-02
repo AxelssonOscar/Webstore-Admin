@@ -24,6 +24,54 @@ namespace Webstore_Admin.Models.Repositories
                                         || c.Name.Contains(name))
                                         .Include(c => c);
 
+        public IQueryable<Customer> BadSearch(string name, string city, string address)
+        {
+            //Name exist, city does not exist, address does not exist
+            if(name != "" && city ==  null && address == null)
+            {
+                return _context.Customers.Where(c => c.Name.Contains(name)).Include(c => c);
+            }
+
+            //Name does not exist, city exist, address does not exist
+            if (name == null && city != "" && address == null)
+            {
+                return _context.Customers.Where(c => c.City.Contains(city)).Include(c => c);
+            }
+
+            //Name does not exist, city does not exist, address exist
+            if (name == null && city == null && address != "")
+            {
+                return _context.Customers.Where(c => c.Address.Contains(address)).Include(c => c);
+            }
+
+            //Name exist, city exist, address does not exist
+            if (name != "" && city != "" && address == null)
+            {
+                return _context.Customers.Where(c => c.Name.Contains(name)
+                                                  && c.City.Contains(city)).Include(c => c);
+            }
+
+            //Name exist, city does not exist, address exist
+            if (name != "" && city == null && address != "")
+            {
+                return _context.Customers.Where(c => c.Name.Contains(name)
+                                                  && c.Address.Contains(address)).Include(c => c);
+            }
+
+            //Name does not exist, city exist, address exist
+            if (name == null && city != "" && address != "")
+            {
+                return _context.Customers.Where(c => c.City.Contains(city)
+                                                  && c.Address.Contains(address)).Include(c => c);
+            }
+
+            //If all fields exist, return this.
+                return _context.Customers.Where(c => c.Name.Contains(name)
+                                                  && c.City.Contains(city)
+                                                  && c.Address.Contains(address)).Include(c => c);
+            
+        }
+
 
         public IQueryable<Customer> GetSingle(int? id) =>
             _context.Customers.Where(c => c.Id == id);
