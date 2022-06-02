@@ -28,6 +28,6 @@ namespace Webstore_Admin.Models
         public int? CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public ICollection<Discount> Discounts { get; set; }
+        public ICollection<DiscountProduct> DiscountProducts { get; set; }
     }
 }
