@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ using Webstore_Admin.ViewModel;
 
 namespace Webstore_Admin.Controllers
 {
+    [Authorize]
     public class DiscountController : Controller
     {
         private readonly IDiscountRepository _discountRepository;
